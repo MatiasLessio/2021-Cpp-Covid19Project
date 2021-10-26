@@ -4,9 +4,13 @@
 #include <sstream>
 #include "headers/case.h"
 //#include "headers/Lista.h"
+
 using namespace std;
+
 void stats(string path);
-void Quick_Sort_Casos(Cases x[],int p,int ltimo);
+
+void Quick_Sort_Casos(Cases x[],int inicio,int final);
+
 int main(int argc, char **argv){
     string path = argv[argc - 1];
     for(int i=1; i< argc -1 ; i++){
