@@ -6,6 +6,7 @@
 //#include "headers/Lista.h"
 using namespace std;
 void stats(string path);
+void Quick_Sort_Casos(Cases x[],int p,int ltimo);
 int main(int argc, char **argv){
     string path = argv[argc - 1];
     for(int i=1; i< argc -1 ; i++){
@@ -74,4 +75,28 @@ void stats(string path){
     for (int i = 0; i < 10; i++) {
         cout << "Entre " << i * 10 << " y " << (i * 10) + 9 << " anios es: " << ageDeceased[i] << endl;
     }
+}
+void Quick_Sort_Casos(Cases x[],int inicio,int final){
+    int i,j,medio;
+    Cases pivot, aux;
+    medio=(inicio+final)/2;
+    pivot= x[medio];
+    i=inicio;
+    j=final;
+    do
+    {
+        while(x[i]<pivot) i++;
+        while(x[j]>pivot) j--;
+        if(i<=j)
+        {
+            aux=x[i];
+            x[i]=x[j];
+            x[j]=aux;
+            i++;
+            j--;
+        }
+    }
+    while(i<=j);
+    if(j>inicio) Quick_Sort_Casos(x,inicio,j);
+    if(i<final) Quick_Sort_Casos(x,i,final)
 }

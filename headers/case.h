@@ -30,13 +30,12 @@ public:
     void processLine(string line);
 
     string getClasificacion();
+
     int getAge();
 
     string getAniosOMeses();
 
     string getIsDeceased();
-
-
 };
 
 Cases::Cases() {
