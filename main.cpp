@@ -149,8 +149,8 @@ void Cases_CUI (string path, string date)
             ArrayCases[i] = ListCUI.getDato(i);
         }
         Quick_Sort_Cases(ArrayCases, 0, ListCUI.getTamanio());
-        cout<<"Los Casos mayores a "<<date<<" de forma ordenada son:"<<endl;
         cout<<"-----------------------------------------------------"<<endl;
+        cout<<"Los Casos mayores a "<<date<<" de forma ordenada son:"<<endl;
         for (int i = 0; i < ListCUI.getTamanio(); i++) 
         {
             if (ArrayCases[i] > date)
