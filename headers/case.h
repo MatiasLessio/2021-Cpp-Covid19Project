@@ -28,21 +28,51 @@ public:
 
     void processLine(string line);
 
-    string getClasificacion();
+    void insertCUI(string cui);
+
+    void insertIDCases(int id);
+
+    void insertAge(int age);
+    
+    void insertDateCUI(string date);
+
+    void inserTAniosOMeses(string anio_meses);
+
+    void insertDeseaced(string status);
+
+    void insertIdProvincia(int idprov);
+
+    void insertClasificacion(string clasifi);
+
+    void insertProvincia(string Prov);
+
+    int IdCases();
 
     int getAge();
+
+    int Provincia_Id();
 
     string getAniosOMeses();
 
     string getIsDeceased();
 
-    void insertCUI(string cui);
+    string getClasificacion();
     
     string Cui();
     
-    void insertDateCUI(string date);
-    
     string Date_CUI();
+    
+    string Provincia();
+    
+    friend ostream &operator<<(ostream &os, const Cases &cases);
+    
+    bool operator<(const Cases &internacion) const;
+
+    bool operator>(const Cases &internacion) const;
+
+    bool operator<=(const Cases &internacion) const;
+
+    bool operator>=(const Cases &internacion) const;
 };
 
 Cases::Cases() {
@@ -60,7 +90,6 @@ Cases::Cases() {
 Cases::Cases(string line){
     processLine(line);
 }
-
 
 void Cases::processLine(string line){
     stringstream s(line);
@@ -109,15 +138,42 @@ void Cases::processLine(string line){
                 break;
         }
     }
-
-
 }
-
-string Cases::getClasificacion() {
-    return clasificacion;
+void Cases::insertCUI(string cui) {
+    CUI = cui;
+}
+void Cases::insertIDCases(int id){
+    id_Cases=id;
+}    
+void Cases::insertAge(int age){
+    edad=age;
+}
+void Cases::insertDateCUI(string date) {
+    dateCUI = date;
+}
+void Cases::inserTAniosOMeses(string anio_meses){
+    aniosOmeses=anio_meses;
+}
+void Cases::insertDeseaced(string status){
+    isDeceased=status;
+}
+void Cases::insertIdProvincia(int idprov){
+    idProvincia=idprov;
+}
+void Cases::insertClasificacion(string clasifi){
+    clasificacion=clasifi;
+}
+void Cases::insertProvincia(string Prov){
+    provincia=Prov;
+}
+int Cases::IdCases(){
+    return id_Cases;
 }
 int Cases::getAge(){
     return edad;
+}
+int Cases::Provincia_Id(){
+    return idProvincia;
 }
 string Cases::getAniosOMeses() {
     return aniosOmeses;
@@ -125,16 +181,35 @@ string Cases::getAniosOMeses() {
 string Cases::getIsDeceased(){
     return isDeceased;
 }
-void Cases::insertCUI(string cui) {
-    CUI = cui;
-}
+string Cases::getClasificacion() {
+    return clasificacion;
+}    
 string Cases::Cui() {
     return CUI;
-}
+}    
 string Cases::Date_CUI() {
     return dateCUI;
+}   
+string Cases::Provincia(){
+    return provincia;
 }
-void Cases::insertDateCUI(string date) {
-    dateCUI = date;
+ostream &operator<<(ostream &os, const Cases &cases) {
+    os << "Id_Casos:" << cases.id_Cases << " Edad:" << cases.edad << " Anios/Meses:" << cases.aniosOmeses << " CUI:"
+       << cases.CUI << " FechaCUI:" << cases.dateCUI << " Fallecio:" << cases.isDeceased << " IdProvincia:"
+       << cases.idProvincia<< " Provincia:"
+       << cases.provincia << " Clasificacion:" << cases.clasificacion;
+    return os;
+}//Muestra los datos de las columnas que se encuentran a la derecha del dato de referencia
+bool Cases::operator<(const Cases &internacion) const {
+    return dateCUI < internacion.dateCUI;
+}
+bool Cases::operator>(const Cases &internacion) const {
+    return dateCUI > internacion.dateCUI;
+}
+bool Cases::operator<=(const Cases &internacion) const {
+    return !(internacion < *this);
+}
+bool Cases::operator>=(const Cases &internacion) const {
+    return !(*this < internacion);
 }
 #endif // PARCIAL2_CASE_H
