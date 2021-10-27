@@ -76,8 +76,8 @@ void stats(string path){
             }
         }
     }
-    float pDeceased = ((numDeceased * 100) / numCases);
-    float pInfected = ((numInfected * 100) / numCases);
+    float pDeceased = ((numDeceased * 100) / numCases);//calculamos el porcentaje de muertos
+    float pInfected = ((numInfected * 100) / numCases);//calculamos el porcentaje de infectados
     cout<< "Cantidad de casos estudiados, (muestra), -> "<<numCases<<endl;
     cout<< "Cantidad total de infectados-> "<<numInfected<<endl;
     cout<< "Cantidad de fallecidos-> "<<numDeceased<<endl;
@@ -94,6 +94,8 @@ void stats(string path){
         cout << "Entre " << i * 10 << " y " << (i * 10) + 9 << " anios es: " << ageDeceased[i] << endl;
     }
 }
+
+
 void Quick_Sort_Cases(Cases x[],int inicio,int final){
     int i,j,medio;
     Cases pivot, aux;
@@ -116,7 +118,7 @@ void Quick_Sort_Cases(Cases x[],int inicio,int final){
     }
     while(i<=j);
     if(j>inicio) Quick_Sort_Cases(x,inicio,j);
-    if(i<final) Quick_Sort_Cases(x,i,final)
+    if(i<final) Quick_Sort_Cases(x,i,final);
 }
 
 void Cases_CUI (string path, string date)
@@ -163,8 +165,8 @@ void Cases_CUI (string path, string date)
             }
         }else
         {
-            cout<<"En esta muestra no se han detectado Casos en Cuidados Intensivos"
+            cout<<"En esta muestra no se han detectado Casos en Cuidados Intensivos"<<endl;
         }
     }
-    }
 }
+
