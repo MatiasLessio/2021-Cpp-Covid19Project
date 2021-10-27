@@ -37,9 +37,9 @@ int main(int argc, char **argv){
 }  
 
 void stats(string path){
-    cout<<"----------------------------------------------"<<endl;
+    cout<<"--------------------------"<<endl;
     cout<<"USTED EJECUTO ESTADISTICAS"<<endl;
-    cout<<"----------------------------------------------"<<endl;
+    cout<<"--------------------------"<<endl;
     fstream file;
     float numCases=0, numInfected=0, numDeceased=0;
     file.open(path, ios::in);
@@ -121,6 +121,9 @@ void Quick_Sort_Cases(Cases x[],int inicio,int final){
 
 void Cases_CUI (string path, string date)
 {
+    cout<<"--------------------------------------------------------"<<endl;
+    cout<<"USTED EJECUTO FECHAS DE LOS CASOS EN CUIDADOS INTENSIVOS"<<endl;
+    cout<<"--------------------------------------------------------"<<endl;
     Lista <Cases> ListCUI;
     Cases cases;
     fstream file;
@@ -145,8 +148,8 @@ void Cases_CUI (string path, string date)
         {
             ArrayCases[i] = ListCUI.getDato(i);
         }
-        cout<<"Los Casos mayores a "<<date<<" de forma ordenada son: "<<endl;
-        cout<<"------------------------------------------------------"<<endl;
+        cout<<"Los Casos mayores a "<<date<<" de forma ordenada son:"<<endl;
+        cout<<"-----------------------------------------------------"<<endl;
         for (int i = 0; i < ListCUI.getTamanio(); i++) 
         {
             if (ArrayCases[i] > date)
