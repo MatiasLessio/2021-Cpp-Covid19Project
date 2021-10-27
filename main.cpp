@@ -26,7 +26,7 @@ int main(int argc, char **argv){
         {
             if (argv[i + 1][0] == '2') 
             { // Se Revisasi si el argumento siguiente a -casos_cui es una fecha, solo funciona para fechas>=2000
-                fecha = argv[i + 1];
+                date = argv[i + 1];
                 i++;
             }
             Cases_CUI(path, date);
@@ -144,8 +144,8 @@ void Cases_CUI (string path, string date)
         {
             ArrayCases[i] = ListCUI.getDato(i);
         }
-        cout <<"Los Casos mayores a " << date << " de forma ordenada son: " << endl;
-        cout<<"-----------------------------------------------------------"<<endl;
+        cout<<"Los Casos mayores a "<<date<<" de forma ordenada son: "<<endl;
+        cout<<"------------------------------------------------------"<<endl;
         for (int i = 0; i < ListCUI.getTamanio(); i++) 
         {
             if (ArrayCases[i] > date)
