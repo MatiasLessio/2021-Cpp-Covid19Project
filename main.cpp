@@ -3,13 +3,15 @@
 #include <string>
 #include <sstream>
 #include "headers/case.h"
-//#include "headers/Lista.h"
+#include "headers/Lista.h"
 
 using namespace std;
 
 void stats(string path);
 
-void Quick_Sort_Casos(Cases x[],int inicio,int final);
+void Quick_Sort_Cases(Cases x[],int inicio,int final);
+
+void Cases_CUI (string, string date);
 
 int main(int argc, char **argv){
     string path = argv[argc - 1];
@@ -80,7 +82,7 @@ void stats(string path){
         cout << "Entre " << i * 10 << " y " << (i * 10) + 9 << " anios es: " << ageDeceased[i] << endl;
     }
 }
-void Quick_Sort_Casos(Cases x[],int inicio,int final){
+void Quick_Sort_Cases(Cases x[],int inicio,int final){
     int i,j,medio;
     Cases pivot, aux;
     medio=(inicio+final)/2;
@@ -101,6 +103,44 @@ void Quick_Sort_Casos(Cases x[],int inicio,int final){
         }
     }
     while(i<=j);
-    if(j>inicio) Quick_Sort_Casos(x,inicio,j);
-    if(i<final) Quick_Sort_Casos(x,i,final)
+    if(j>inicio) Quick_Sort_Cases(x,inicio,j);
+    if(i<final) Quick_Sort_Cases(x,i,final)
+}
+
+void Cases_CUI (string path, string date)
+{
+    Lista <Cases> ListCUI;
+    Cases cases;
+    fstream file;
+    file.open(path,ios::in);
+    if(file.fail())
+    {
+        cout<<"No se ha podido Abrir el archivo cvs"<<endl;
+    }else
+    {
+        string line;
+        getline(file,line);
+        while(getline(file,line))
+        {
+            cases.processLine(line);
+            if(cases.Cui()=="SI" && cases.Date_CUI()>date)
+            {
+                ListCUI.insertarPrimero(cases);
+            }
+        }
+        Cases ArrayCases[ListCUI.getTamanio()];
+        for (int i = 0; i < ListCUI.getTamanio(); i++) 
+        {
+            ArrayCases[i] = ListCUI.getDato(i);
+        }
+        cout <<"Los Casos mayores a " << date << " de forma ordenada son: " << endl;
+        cout<<"-----------------------------------------------------------"<<endl;
+        for (int i = 0; i < ListCUI.getTamanio(); i++) 
+        {
+            if (ArrayCases[i] > date)
+            {
+                cout << ArrayCases[i] << endl;
+            }
+        }
+    }
 }

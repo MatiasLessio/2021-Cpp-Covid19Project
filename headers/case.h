@@ -22,7 +22,6 @@ private:
 
 public:
     
-
     Cases();
 
     Cases(string line);
@@ -36,6 +35,14 @@ public:
     string getAniosOMeses();
 
     string getIsDeceased();
+
+    void insertCUI(string cui);
+    
+    string Cui();
+    
+    void insertDateCUI(string date);
+    
+    string Date_CUI();
 };
 
 Cases::Cases() {
@@ -117,5 +124,17 @@ string Cases::getAniosOMeses() {
 }
 string Cases::getIsDeceased(){
     return isDeceased;
+}
+void Cases::insertCUI(string cui) {
+    CUI = cui;
+}
+string Cases::Cui() {
+    return CUI;
+}
+string Cases::Date_CUI() {
+    return dateCUI;
+}
+void Cases::insertDateCUI(string date) {
+    dateCUI = date;
 }
 #endif // PARCIAL2_CASE_H
