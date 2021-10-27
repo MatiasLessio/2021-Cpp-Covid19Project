@@ -33,6 +33,7 @@ int main(int argc, char **argv){
         }
     }
     cout<<"Tarea finalizada."<<endl;
+}
 }  
 
 void stats(string path){
