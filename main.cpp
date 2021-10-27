@@ -98,6 +98,7 @@ void stats(string path){
 
 
 void Quick_Sort_Cases(Cases x[],int inicio,int final){
+    
     int i,j,medio;
     Cases pivot, aux;
     medio=(inicio+final)/2;
@@ -106,6 +107,7 @@ void Quick_Sort_Cases(Cases x[],int inicio,int final){
     j=final;
     do
     {
+        cout<<"Se ejecuta el quicksort"<<endl;
         while(x[i]<pivot) i++;
         while(x[j]>pivot) j--;
         if(i<=j)
@@ -153,7 +155,9 @@ void Cases_CUI (string path, string date)
             {
                 ArrayCases[i] = ListCUI.getDato(i);
             }
+            cout<<"Antes del quicksort"<<endl;
             Quick_Sort_Cases(ArrayCases, 0, ListCUI.getTamanio());
+            cout<<"despues del quicksort"<<endl;
             cout<<"-----------------------------------------------------"<<endl;
             cout<<"Los Casos mayores a "<<date<<" de forma ordenada son:"<<endl;
             for (int i = 0; i < ListCUI.getTamanio(); i++) 
