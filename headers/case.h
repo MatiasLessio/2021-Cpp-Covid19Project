@@ -79,7 +79,7 @@ Cases::Cases() {
     id_Cases = 0;
     edad = 0;
     aniosOmeses = "Anios";
-    CUI = "NO-CUI";
+    CUI = "NO";
     dateCUI = "2000-01-01";
     isDeceased = "NO-FALLECIDO";
     idProvincia = 0;
