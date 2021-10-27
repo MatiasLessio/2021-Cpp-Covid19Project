@@ -143,9 +143,10 @@ void Cases_CUI (string path, string date)
                 ListCUI.insertarPrimero(cases);
             }
         }
-        if(cases.Cui()=="SI")
+        Cases ArrayCases[ListCUI.getTamanio()];
+        if(ListCUI.getTamanio()>0)
         {
-            Cases ArrayCases[ListCUI.getTamanio()];
+            
             for (int i = 0; i < ListCUI.getTamanio(); i++) 
             {
                 ArrayCases[i] = ListCUI.getDato(i);
@@ -161,8 +162,6 @@ void Cases_CUI (string path, string date)
                 }
             }
         }else
-        {
-        if(cases.Cui()=="NO")
         {
             cout<<"En esta muestra no se han detectado Casos en Cuidados Intensivos"
         }
