@@ -14,14 +14,13 @@ void Quick_Sort_Cases(Cases x[],int inicio,int final);
 void Cases_CUI (string, string date);//Funcion que sirve para la consigna de los puntos para -casos_cui[fecha]
 
 int main(int argc, char **argv){
-    string date = "2019-01-01";
+    string date = "2020-01-01";
     string path = argv[argc - 1];
     for(int i=1; i< argc -1 ; i++){
         string argAux=argv[i];
         if(argAux == "-estad"){
             stats(path);
-        }else
-        {
+        }else{
         if (argAux == "-casos_cui") 
         {
             if (argv[i + 1][0] == '2') 
@@ -33,8 +32,9 @@ int main(int argc, char **argv){
         }
     }
     cout<<"Tarea finalizada."<<endl;
+    }
 }
-}  
+  
 
 void stats(string path){
     cout<<"--------------------------"<<endl;
@@ -148,7 +148,6 @@ void Cases_CUI (string path, string date)
         Cases ArrayCases[ListCUI.getTamanio()];
         if(ListCUI.getTamanio()>0)
         {
-            
             for (int i = 0; i < ListCUI.getTamanio(); i++) 
             {
                 ArrayCases[i] = ListCUI.getDato(i);
