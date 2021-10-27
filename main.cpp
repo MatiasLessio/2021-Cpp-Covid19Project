@@ -4,6 +4,7 @@
 #include <sstream>
 #include "headers/case.h"
 #include "headers/Lista.h"
+#include "headers/HashMap.h"
 
 using namespace std;
 
