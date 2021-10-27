@@ -11,14 +11,25 @@ void stats(string path);
 
 void Quick_Sort_Cases(Cases x[],int inicio,int final);
 
-void Cases_CUI (string, string date);
+void Cases_CUI (string, string date);//Funcion que sirve para la consigna de los puntos para -casos_cui[fecha]
 
 int main(int argc, char **argv){
+    string date = "2019-01-01";
     string path = argv[argc - 1];
     for(int i=1; i< argc -1 ; i++){
         string argAux=argv[i];
         if(argAux == "-estad"){
             stats(path);
+        }else
+        {
+        if (argAux == "-casos_cui") 
+        {
+            if (argv[i + 1][0] == '2') 
+            { // Se Revisasi si el argumento siguiente a -casos_cui es una fecha, solo funciona para fechas>=2000
+                fecha = argv[i + 1];
+                i++;
+            }
+            Cases_CUI(path, date);
         }
     }
     cout<<"Tarea finalizada."<<endl;
