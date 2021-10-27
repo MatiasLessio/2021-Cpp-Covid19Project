@@ -15,6 +15,7 @@ void Quick_Sort_Cases(Cases x[],int inicio,int final);
 void Cases_CUI (string, string date);//Funcion que sirve para la consigna de los puntos para -casos_cui[fecha]
 
 int main(int argc, char **argv){
+    cout<<(256*10)%10<<endl;
     string date = "2020-01-01";
     string path = argv[argc - 1];
     for(int i=1; i< argc -1 ; i++){
