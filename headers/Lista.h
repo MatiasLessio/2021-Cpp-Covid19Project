@@ -1,5 +1,5 @@
-#ifndef U02_LISTAS_LISTA_LISTA_H_
-#define U02_LISTAS_LISTA_LISTA_H_
+#ifndef PARCIAL2_LISTA_H
+#define PARCIAL2_LISTA_H
 #include "nodo.h"
 /**
  * Clase que implementa una Lista Enlasada generica, ya que puede
@@ -310,4 +310,4 @@ template<class T> void Lista<T>::insertAfter2(T oldValue, unsigned int n, T newV
         throw "No hay Suficientes instancias oldValue (2)";
 }
 
-#endif // U02_LISTAS_LISTA_LISTA_H_
+#endif // PARCIAL2_LISTA_H

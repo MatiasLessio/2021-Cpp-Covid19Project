@@ -1,5 +1,5 @@
-#ifndef NODO_H
-#define NODO_H
+#ifndef PARCIAL2_NODO_H
+#define PARCIAL2_NODO_H
 
 template <class T>
 class Nodo{
@@ -27,4 +27,4 @@ public:
 
 };
 
-#endif //NODO_H
+#endif //PARCIAL2_NODO_H

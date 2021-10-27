@@ -1,5 +1,5 @@
-#ifndef U05_HASH_HASHMAP_HASHMAP_H_
-#define U05_HASH_HASHMAP_HASHMAP_H_
+#ifndef PARCIAL2_HASHMAP_H
+#define PARCIAL2_HASHMAP_H
 
 #include "HashEntry.h"
 
@@ -141,4 +141,4 @@ void HashMap<K, T>::print()
   }
 }
 
-#endif // U05_HASH_HASHMAP_HASHMAP_H_
+#endif // PARCIAL2_HASHMAP_H

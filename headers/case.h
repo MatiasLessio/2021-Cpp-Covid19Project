@@ -66,13 +66,13 @@ public:
     
     friend ostream &operator<<(ostream &os, const Cases &cases);
     
-    bool operator<(const Cases &internacion) const;
+    bool operator<(const Cases &rhs) const;
 
-    bool operator>(const Cases &internacion) const;
+    bool operator>(const Cases &rhs) const;
 
-    bool operator<=(const Cases &internacion) const;
+    bool operator<=(const Cases &rhs) const;
 
-    bool operator>=(const Cases &internacion) const;
+    bool operator>=(const Cases &rhs) const;
 };
 
 Cases::Cases() {
@@ -200,16 +200,16 @@ ostream &operator<<(ostream &os, const Cases &cases) {
        << cases.provincia << " Clasificacion:" << cases.clasificacion;
     return os;
 }//Muestra los datos de las columnas que se encuentran a la derecha del dato de referencia
-bool Cases::operator<(const Cases &internacion) const {
-    return dateCUI < internacion.dateCUI;
+bool Cases::operator<(const Cases &rhs) const {
+    return dateCUI < rhs.dateCUI;
 }
-bool Cases::operator>(const Cases &internacion) const {
-    return dateCUI > internacion.dateCUI;
+bool Cases::operator>(const Cases &rhs) const {
+    return dateCUI > rhs.dateCUI;
 }
-bool Cases::operator<=(const Cases &internacion) const {
-    return !(internacion < *this);
+bool Cases::operator<=(const Cases &rhs) const {
+    return !(rhs < *this);
 }
-bool Cases::operator>=(const Cases &internacion) const {
-    return !(*this < internacion);
-}
+bool Cases::operator>=(const Cases &rhs) const {
+    return !(*this < rhs);
+}//rhs significa terminos indeendientes a las restriscciones
 #endif // PARCIAL2_CASE_H
