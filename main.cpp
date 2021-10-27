@@ -143,20 +143,29 @@ void Cases_CUI (string path, string date)
                 ListCUI.insertarPrimero(cases);
             }
         }
-        Cases ArrayCases[ListCUI.getTamanio()];
-        for (int i = 0; i < ListCUI.getTamanio(); i++) 
+        if(cases.Cui()=="SI")
         {
-            ArrayCases[i] = ListCUI.getDato(i);
-        }
-        Quick_Sort_Cases(ArrayCases, 0, ListCUI.getTamanio());
-        cout<<"-----------------------------------------------------"<<endl;
-        cout<<"Los Casos mayores a "<<date<<" de forma ordenada son:"<<endl;
-        for (int i = 0; i < ListCUI.getTamanio(); i++) 
-        {
-            if (ArrayCases[i] > date)
+            Cases ArrayCases[ListCUI.getTamanio()];
+            for (int i = 0; i < ListCUI.getTamanio(); i++) 
             {
-                cout << ArrayCases[i] << endl;
+                ArrayCases[i] = ListCUI.getDato(i);
             }
+            Quick_Sort_Cases(ArrayCases, 0, ListCUI.getTamanio());
+            cout<<"-----------------------------------------------------"<<endl;
+            cout<<"Los Casos mayores a "<<date<<" de forma ordenada son:"<<endl;
+            for (int i = 0; i < ListCUI.getTamanio(); i++) 
+            {
+                if (ArrayCases[i] > date)
+                {
+                    cout << ArrayCases[i] << endl;
+                }
+            }
+        }else
+        {
+        if(cases.Cui()=="NO")
+        {
+            cout<<"En esta muestra no se han detectado Casos en Cuidados Intensivos"
         }
+    }
     }
 }
