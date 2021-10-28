@@ -67,10 +67,11 @@ int main(int argc, char **argv){
     }
     }
     }    
-}    
     cout<<"Tarea finalizada."<<endl;
     return 0;  
-}
+}    
+
+
 
 void stats(string path)
 {
@@ -81,6 +82,7 @@ void stats(string path)
     float numCases=0, numInfected=0, numDeceased=0;
     file.open(path, ios::in);
     Cases cases;
+    
     int ageConfirmed[10]; //0-9/10-19/20-29/30-39/40-49/50-59/60-69/70-79/80-89/90-99
     int ageDeceased[10]; //0-9/10-19/20-29/30-39/40-49/50-59/60-69/70-79/80-89/90-99
     for (int i = 0; i<10; i++){
@@ -132,7 +134,7 @@ void stats(string path)
     }
 }
 
-<<<<<<< HEAD
+
 void Quick_Sort_Province(Province x[], int inicio, int final)
 {
     int i,j,medio;
@@ -159,9 +161,7 @@ void Quick_Sort_Province(Province x[], int inicio, int final)
     if(i<final) Quick_Sort_Province(x,i,final);
 }
 
-void Quick_Sort_Cases(Cases x[],int inicio,int final)
-{
-=======
+
 void Quick_Sort_Cases(Cases arr[], int first, int last){
   int i, j, middle;
   Cases pivot, aux;
@@ -170,32 +170,7 @@ void Quick_Sort_Cases(Cases arr[], int first, int last){
   i = first;
   j = last;
 
-<<<<<<< Updated upstream
-void Quick_Sort_Cases(Cases x[],int inicio,int final){
-    
->>>>>>> 56211cbc7ed06e83d2084e42d223aedc7e2e1bdd
-    int i,j,medio;
-    Cases pivot, aux;
-    medio=(inicio+final)/2;
-    pivot= x[medio];
-    i=inicio;
-    j=final;
-    do
-    {
-        cout<<"Se ejecuta el quicksort"<<endl;
-        while(x[i]<pivot) i++;
-        while(x[j]>pivot) j--;
-        if(i<=j)
-        {
-            aux=x[i];
-            x[i]=x[j];
-            x[j]=aux;
-            i++;
-            j--;
-        }
-=======
   do {
-    cout<<"ORDENANDO"<<endl;
     while (arr[i] < pivot)
       i++;
     while (arr[j] > pivot)
@@ -207,19 +182,15 @@ void Quick_Sort_Cases(Cases x[],int inicio,int final){
       arr[j] = aux;
       i++;
       j--;
->>>>>>> Stashed changes
     }
   } while (i <= j);
 
-  if (j > first){
+  if (j > first)
     Quick_Sort_Cases(arr, first, j);
-  }
-    
-  if (i < last){
+  if (i < last)
     Quick_Sort_Cases(arr, i, last);
-  }
-    
 }
+
 
 void Cases_CUI (string path, string date)
 {
@@ -253,14 +224,12 @@ void Cases_CUI (string path, string date)
             {
                 ArrayCases[i] = ListDatesCUI.getDato(i);
             }
-<<<<<<< Updated upstream
             cout<<"Antes del quicksort"<<endl;
             Quick_Sort_Cases(ArrayCases, 0, ListCUI.getTamanio());
-=======
+
             cout<<"La cantidad de casos en CUIDADOS INTENSIVOS es-> "<<ListCUI.getTamanio()<<endl;
             cout<<"antes del quicksort"<<endl;
             //Quick_Sort_Cases(ArrayCases, 0, ListCUI.getTamanio());
->>>>>>> Stashed changes
             cout<<"despues del quicksort"<<endl;
             cout<<"-----------------------------------------------------"<<endl;
             cout<<"Los Casos mayores a "<<date<<" de forma ordenada son:"<<endl;
