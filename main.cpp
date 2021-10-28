@@ -209,7 +209,6 @@ void Cases_CUI (string path, string date)
     cout<<"USTED EJECUTO FECHAS DE LOS CASOS EN CUIDADOS INTENSIVOS"<<endl;
     cout<<"--------------------------------------------------------"<<endl;
     Cases cases;
-    Lista <int> ListDatesCUI;
     Lista <Cases> ListCUI;
 
     
@@ -227,7 +226,6 @@ void Cases_CUI (string path, string date)
             cases.processLine(line);
             if(cases.Cui()=="SI" && stringAinteger(cases.Date_CUI()) > stringAinteger(date)) {
                 ListCUI.insertarPrimero(cases);
-                ListDatesCUI.insertarPrimero(stringAinteger(cases.Date_CUI()));
             } 
         }
         int num=ListCUI.getTamanio();
