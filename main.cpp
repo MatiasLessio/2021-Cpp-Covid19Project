@@ -11,9 +11,9 @@ using namespace std;
 
 void stats(string path);//Funcion que sirve para la consigna de los puntos para -estad
 
-void Quick_Sort_Cases(Cases x[],int inicio,int final);
+void Quick_Sort_Cases(Cases arr[],int first,int last);
 
-void Quick_Sort_Province(Province[], int inicio, int final);
+void Quick_Sort_Province(Province arr[], int first, int last);
 
 void Cases_CUI (string, string date);//Funcion que sirve para la consigna de los puntos para -casos_cui[fecha]
 
@@ -69,9 +69,7 @@ int main(int argc, char **argv){
     }    
     cout<<"Tarea finalizada."<<endl;
     return 0;  
-}    
-
-
+}
 
 void stats(string path)
 {
@@ -82,7 +80,6 @@ void stats(string path)
     float numCases=0, numInfected=0, numDeceased=0;
     file.open(path, ios::in);
     Cases cases;
-    
     int ageConfirmed[10]; //0-9/10-19/20-29/30-39/40-49/50-59/60-69/70-79/80-89/90-99
     int ageDeceased[10]; //0-9/10-19/20-29/30-39/40-49/50-59/60-69/70-79/80-89/90-99
     for (int i = 0; i<10; i++){
@@ -134,63 +131,58 @@ void stats(string path)
     }
 }
 
-
-void Quick_Sort_Province(Province x[], int inicio, int final)
+void Quick_Sort_Province(Province arr[], int first, int last)
 {
-    int i,j,medio;
+    int i, j, medio;
     Province pivot, aux;
-    medio=(inicio+final)/2;
-    pivot= x[medio];
-    i=inicio;
-    j=final;
+    medio=(first+last)/2;
+    pivot= arr[medio];
+    i=first;
+    j=last;
     do
     {
-        while(x[i]>pivot) i++;
-        while(x[j]<pivot) j--;
+        while(arr[i]>pivot) i++;
+        while(arr[j]<pivot) j--;
         if(i<=j)
         {
-            aux=x[j];
-            x[j]=x[i];
-            x[i]=aux;
+            aux=arr[j];
+            arr[j]=arr[i];
+            arr[i]=aux;
             i++;
             j--;
         }
     }
     while(i<=j);
-    if(j>inicio) Quick_Sort_Province(x,inicio,j);
-    if(i<final) Quick_Sort_Province(x,i,final);
+    if(j>first) Quick_Sort_Province(arr, first, j);
+    if(i<last) Quick_Sort_Province(arr, i, last);
 }
 
-
 void Quick_Sort_Cases(Cases arr[], int first, int last){
-  int i, j, middle;
+ int i, j, middle;
   Cases pivot, aux;
-  middle = (first + last) / 2;
+  middle = (first+last) / 2;
   pivot = arr[middle];
-  i = first;
-  j = last;
+  i=first;
+  j=last;
 
   do {
-    while (arr[i] < pivot)
+    while (arr[i]<pivot)
       i++;
-    while (arr[j] > pivot)
+    while (arr[j]>pivot)
       j--;
 
     if (i <= j) {
-      aux = arr[i];
-      arr[i] = arr[j];
-      arr[j] = aux;
+      aux=arr[i];
+      arr[i]=arr[j];
+      arr[j]=aux;
       i++;
       j--;
     }
-  } while (i <= j);
+  } while (i<=j);
 
-  if (j > first)
-    Quick_Sort_Cases(arr, first, j);
-  if (i < last)
-    Quick_Sort_Cases(arr, i, last);
+  if (j>first) Quick_Sort_Cases(arr, first, j);
+  if (i<last) Quick_Sort_Cases(arr, i, last);
 }
-
 
 void Cases_CUI (string path, string date)
 {
@@ -226,10 +218,6 @@ void Cases_CUI (string path, string date)
             }
             cout<<"Antes del quicksort"<<endl;
             Quick_Sort_Cases(ArrayCases, 0, ListCUI.getTamanio());
-
-            cout<<"La cantidad de casos en CUIDADOS INTENSIVOS es-> "<<ListCUI.getTamanio()<<endl;
-            cout<<"antes del quicksort"<<endl;
-            //Quick_Sort_Cases(ArrayCases, 0, ListCUI.getTamanio());
             cout<<"despues del quicksort"<<endl;
             cout<<"-----------------------------------------------------"<<endl;
             cout<<"Los Casos mayores a "<<date<<" de forma ordenada son:"<<endl;
