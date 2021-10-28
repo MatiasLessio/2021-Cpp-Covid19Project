@@ -6,13 +6,10 @@
 #include "headers/Lista.h"
 #include "headers/HashMap.h"
 #include "headers/Province.h"
-#include <time.h>
-#include <stdio.h>
-#include <dos.h>
 
 using namespace std;
 
-void stats(string path);
+void stats(string path);//Funcion que sirve para la consigna de los puntos para -estad
 
 void Quick_Sort_Cases(Cases x[],int inicio,int final);
 
@@ -25,22 +22,22 @@ void P_Cases(string, int);//Funcion que sirve para la consigna de los puntos par
 void P_Death(string, int);//Funcion que sirve para la consigna de los puntos para -p_muertes[n]
 
 int main(int argc, char **argv){
+    cout<<(256*10)%10<<endl;
     string date = "2020-01-01";
     string path = argv[argc - 1];
     int TotalProv = 0;
-    //clock_t start, end;
-    //start = clock();
+    string datenum = "";
     for(int i=1; i< argc -1 ; i++){
         string argAux=argv[i];
         if(argAux == "-estad"){
             stats(path);
         }else{
-        if (argAux == "-casos_cui") 
-        {
-            if (argv[i + 1][0] == '2') 
-            { // Se Revisasi si el argumento siguiente a -casos_cui es una fecha, solo funciona para fechas>=2000
+        if (argAux == "-casos_cui") {
+            if (argv[i + 1][0] == '[') {
+            // Se Revisa si el argumento siguiente a -casos_cui es una fecha, solo funciona para fechas>=2000
                 date = argv[i + 1];
                 i++;
+                cout<<"date: "<<date<<endl;
             }
             Cases_CUI(path, date);
         }else{
@@ -66,11 +63,10 @@ int main(int argc, char **argv){
                 }
             P_Death(path, TotalProv);
         }
+        }
     }
     }
     }    
-    //end = clock();
-    //printf("The time was: %f\n", (end - start) / CLK_TCK);
 }    
     cout<<"Tarea finalizada."<<endl;
     return 0;  
@@ -100,7 +96,7 @@ void stats(string path)
         while(getline(file, line)){
             cases.processLine(line);
             numCases++;
-            if(cases.getClasificacion()=="Confirmado"){
+            if(cases.getClasificacion()== "Confirmado"){
                 numInfected++;
                 if(cases.getAniosOMeses() == "Meses"){
                     ageConfirmed[0]++;
@@ -109,7 +105,7 @@ void stats(string path)
                 }
             } else if (cases.getIsDeceased()== "SI"){
                 numDeceased++;
-                if(cases.getAniosOMeses()=="Meses"){
+                if(cases.getAniosOMeses()== "Meses"){
                     ageDeceased[0]++;
                 } else {
                     ageDeceased[cases.getAge()/10]++;
@@ -136,6 +132,7 @@ void stats(string path)
     }
 }
 
+<<<<<<< HEAD
 void Quick_Sort_Province(Province x[], int inicio, int final)
 {
     int i,j,medio;
@@ -164,6 +161,19 @@ void Quick_Sort_Province(Province x[], int inicio, int final)
 
 void Quick_Sort_Cases(Cases x[],int inicio,int final)
 {
+=======
+void Quick_Sort_Cases(Cases arr[], int first, int last){
+  int i, j, middle;
+  Cases pivot, aux;
+  middle = (first + last) / 2;
+  pivot = arr[middle];
+  i = first;
+  j = last;
+
+<<<<<<< Updated upstream
+void Quick_Sort_Cases(Cases x[],int inicio,int final){
+    
+>>>>>>> 56211cbc7ed06e83d2084e42d223aedc7e2e1bdd
     int i,j,medio;
     Cases pivot, aux;
     medio=(inicio+final)/2;
@@ -172,6 +182,7 @@ void Quick_Sort_Cases(Cases x[],int inicio,int final)
     j=final;
     do
     {
+        cout<<"Se ejecuta el quicksort"<<endl;
         while(x[i]<pivot) i++;
         while(x[j]>pivot) j--;
         if(i<=j)
@@ -182,10 +193,32 @@ void Quick_Sort_Cases(Cases x[],int inicio,int final)
             i++;
             j--;
         }
+=======
+  do {
+    cout<<"ORDENANDO"<<endl;
+    while (arr[i] < pivot)
+      i++;
+    while (arr[j] > pivot)
+      j--;
+
+    if (i <= j) {
+      aux = arr[i];
+      arr[i] = arr[j];
+      arr[j] = aux;
+      i++;
+      j--;
+>>>>>>> Stashed changes
     }
-    while(i<=j);
-    if(j>inicio) Quick_Sort_Cases(x,inicio,j);
-    if(i<final) Quick_Sort_Cases(x,i,final);
+  } while (i <= j);
+
+  if (j > first){
+    Quick_Sort_Cases(arr, first, j);
+  }
+    
+  if (i < last){
+    Quick_Sort_Cases(arr, i, last);
+  }
+    
 }
 
 void Cases_CUI (string path, string date)
@@ -194,6 +227,7 @@ void Cases_CUI (string path, string date)
     cout<<"USTED EJECUTO FECHAS DE LOS CASOS EN CUIDADOS INTENSIVOS"<<endl;
     cout<<"--------------------------------------------------------"<<endl;
     Lista <Cases> ListCUI;
+    Lista <Cases> ListDatesCUI;
     Cases cases;
     fstream file;
     file.open(path,ios::in);
@@ -207,31 +241,38 @@ void Cases_CUI (string path, string date)
         while(getline(file,line))
         {
             cases.processLine(line);
-            if(cases.Cui()=="SI" && cases.Date_CUI()>date)
-            {
+            if(cases.Cui()=="SI" && cases.Date_CUI()>date) {
                 ListCUI.insertarPrimero(cases);
-            }
+                ListDatesCUI.insertarPrimero(cases.Date_CUI());
+            } 
         }
         Cases ArrayCases[ListCUI.getTamanio()];
         if(ListCUI.getTamanio()>0)
         {
             for (int i = 0; i < ListCUI.getTamanio(); i++) 
             {
-                ArrayCases[i] = ListCUI.getDato(i);
+                ArrayCases[i] = ListDatesCUI.getDato(i);
             }
+<<<<<<< Updated upstream
+            cout<<"Antes del quicksort"<<endl;
             Quick_Sort_Cases(ArrayCases, 0, ListCUI.getTamanio());
+=======
+            cout<<"La cantidad de casos en CUIDADOS INTENSIVOS es-> "<<ListCUI.getTamanio()<<endl;
+            cout<<"antes del quicksort"<<endl;
+            //Quick_Sort_Cases(ArrayCases, 0, ListCUI.getTamanio());
+>>>>>>> Stashed changes
+            cout<<"despues del quicksort"<<endl;
             cout<<"-----------------------------------------------------"<<endl;
             cout<<"Los Casos mayores a "<<date<<" de forma ordenada son:"<<endl;
-            for (int i = 0; i < ListCUI.getTamanio(); i++) 
-            {
-                if (ArrayCases[i] > date)
-                {
+            for (int i = 0; i < ListCUI.getTamanio(); i++) {
+
+                if (ArrayCases[i] > date) {
                     cout << ArrayCases[i] << endl;
                 }
             }
         }else
         {
-            cout<<"En esta muestra no se han detectado Casos en Cuidados Intensivos"<<endl;
+            cout<<"Desde la fecha "<<date<<" no se han detectado Casos en Cuidados Intensivos"<<endl;
         }
     }
 }
