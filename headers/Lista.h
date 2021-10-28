@@ -11,6 +11,7 @@ private:
     Nodo<T> *inicio; //Si la lista esta vacia, su puntero de inicio debe apuntar al puntero null
 //puntero al nodo de inicio
 public:
+
     Lista();
 
     Lista(const Lista<T> &li);

@@ -29,7 +29,7 @@ public:
         void setName(const string &prov){
             NameProv=prov;
         }
-        void AumentarContado(){
+        void AumentarContador(){
             contador++;
         }
         bool operator==(const Province &rhs) const {

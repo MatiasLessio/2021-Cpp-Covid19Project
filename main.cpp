@@ -5,6 +5,10 @@
 #include "headers/case.h"
 #include "headers/Lista.h"
 #include "headers/HashMap.h"
+#include "headers/Province.h"
+#include <time.h>
+#include <stdio.h>
+#include <dos.h>
 
 using namespace std;
 
@@ -12,11 +16,20 @@ void stats(string path);
 
 void Quick_Sort_Cases(Cases x[],int inicio,int final);
 
+void Quick_Sort_Province(Province[], int inicio, int final);
+
 void Cases_CUI (string, string date);//Funcion que sirve para la consigna de los puntos para -casos_cui[fecha]
+
+void P_Cases(string, int);//Funcion que sirve para la consigna de los puntos para -p_casos[n]
+
+void P_Death(string, int);//Funcion que sirve para la consigna de los puntos para -p_muertes[n]
 
 int main(int argc, char **argv){
     string date = "2020-01-01";
     string path = argv[argc - 1];
+    int TotalProv = 0;
+    //clock_t start, end;
+    //start = clock();
     for(int i=1; i< argc -1 ; i++){
         string argAux=argv[i];
         if(argAux == "-estad"){
@@ -30,14 +43,41 @@ int main(int argc, char **argv){
                 i++;
             }
             Cases_CUI(path, date);
+        }else{
+             if (argAux == "-p_casos")
+             {
+                try {
+                    TotalProv = stoi(argv[i + 1]);
+                    i++;
+                }
+                catch (...) {
+                    TotalProv = 24;
+                }
+            P_Cases(path, TotalProv);
+        }else{
+             if (argAux == "-p_muertes")
+             {
+                try {
+                    TotalProv = stoi(argv[i + 1]);
+                    i++;
+                }
+                catch (...) {
+                    TotalProv = 24;
+                }
+            P_Death(path, TotalProv);
         }
     }
-    cout<<"Tarea finalizada."<<endl;
     }
+    }    
+    //end = clock();
+    //printf("The time was: %f\n", (end - start) / CLK_TCK);
+}    
+    cout<<"Tarea finalizada."<<endl;
+    return 0;  
 }
-  
 
-void stats(string path){
+void stats(string path)
+{
     cout<<"--------------------------"<<endl;
     cout<<"USTED EJECUTO ESTADISTICAS"<<endl;
     cout<<"--------------------------"<<endl;
@@ -96,8 +136,34 @@ void stats(string path){
     }
 }
 
+void Quick_Sort_Province(Province x[], int inicio, int final)
+{
+    int i,j,medio;
+    Province pivot, aux;
+    medio=(inicio+final)/2;
+    pivot= x[medio];
+    i=inicio;
+    j=final;
+    do
+    {
+        while(x[i]>pivot) i++;
+        while(x[j]<pivot) j--;
+        if(i<=j)
+        {
+            aux=x[j];
+            x[j]=x[i];
+            x[i]=aux;
+            i++;
+            j--;
+        }
+    }
+    while(i<=j);
+    if(j>inicio) Quick_Sort_Province(x,inicio,j);
+    if(i<final) Quick_Sort_Province(x,i,final);
+}
 
-void Quick_Sort_Cases(Cases x[],int inicio,int final){
+void Quick_Sort_Cases(Cases x[],int inicio,int final)
+{
     int i,j,medio;
     Cases pivot, aux;
     medio=(inicio+final)/2;
@@ -170,3 +236,84 @@ void Cases_CUI (string path, string date)
     }
 }
 
+void P_Cases(string path, int NumProvince)
+{
+    cout<<"-------------------------------------"<<endl;
+    cout<<"USTED EJECUTO CONTAGIOS POR PROVINCIA"<<endl;
+    cout<<"-------------------------------------"<<endl;
+    const string ListProvince[] = {"CABA", "Buenos Aires", "Catamarca", "Chaco", "Chubut", "Cordoba", "Corrientes",
+                                      "Entre Rios", "Formosa", "Jujuy", "La Pampa", "La Rioja", "Mendoza", "Misiones",
+                                      "Neuquen", "Rio Negro", "Salta", "San Juan", "San Luis", "Santa Cruz", "Santa Fe",
+                                      "Santiago del Estero", "Tierra del Fuego", "Tucuman"};
+    Province ProvinciaContagiado[24];
+    for (int i = 0; i < 24; i++) {
+        ProvinciaContagiado[i] = Province(ListProvince[i], 0);
+    }
+    fstream file;
+    file.open(path, ios::in);
+    Cases cases;
+    if (file.fail()) {
+        cout << "No se ha podido abrir el archivo csv" << endl;
+    } else {
+        string line;
+        getline(file, line);
+        while (getline(file, line)) {
+            cases.processLine(line);
+            if (cases.getClasificacion() == "Confirmado") {
+                for (int k = 0; k < 24; k++) {
+                    if (cases.Provincia() == ProvinciaContagiado[k].getname()) {
+                        ProvinciaContagiado[k].AumentarContador();
+                        break;
+                    }
+                }
+            } 
+        }
+    Quick_Sort_Province(ProvinciaContagiado, 0, 23);
+    cout <<"Casos Confirmados por Provincia:"<< endl;
+    cout <<"--------------------------------"<<endl;
+    for (int i = 0; i < NumProvince; i++) {
+    cout << ProvinciaContagiado[i] << endl;
+   }
+}  
+}
+
+void P_Death(string path, int NumProvince)
+{
+    cout<<"-------------------------------------"<<endl;
+    cout<<"USTED EJECUTO MUERTES POR PROVINCIA"<<endl;
+    cout<<"-------------------------------------"<<endl;
+    const string ListProvince[] = {"CABA", "Buenos Aires", "Catamarca", "Chaco", "Chubut", "Cordoba", "Corrientes",
+                                      "Entre Rios", "Formosa", "Jujuy", "La Pampa", "La Rioja", "Mendoza", "Misiones",
+                                      "Neuquen", "Rio Negro", "Salta", "San Juan", "San Luis", "Santa Cruz", "Santa Fe",
+                                      "Santiago del Estero", "Tierra del Fuego", "Tucuman"};
+    Province ProvinciaFallecidos[24];
+    for (int i = 0; i < 24; i++) {
+        ProvinciaFallecidos[i] = Province(ListProvince[i], 0);
+    }
+    fstream file;
+    file.open(path, ios::in);
+    Cases cases;
+    if (file.fail()) {
+        cout << "No se ha podido abrir el archivo csv" << endl;
+    } else {
+        string line;
+        getline(file, line);
+        while (getline(file, line)) {
+            cases.processLine(line);
+            if (cases.getIsDeceased() == "SI") {
+                for (int k = 0; k < 24; k++) {
+                    if (cases.Provincia() == ProvinciaFallecidos[k].getname()) {
+                        ProvinciaFallecidos[k].AumentarContador();
+                        break;
+                    }
+                }
+            } 
+        }
+        Quick_Sort_Province(ProvinciaFallecidos, 0, 23);
+        cout <<"Casos Fallecidos por Provincia:"<< endl;
+        cout <<"--------------------------------"<<endl;
+        for (int i = 0; i < NumProvince; i++) {
+            cout << ProvinciaFallecidos[i] << endl;
+       }
+    }
+}
