@@ -11,7 +11,7 @@ using namespace std;
 
 void stats(string path);//Funcion que sirve para la consigna de los puntos para -estad
 
-void Quick_Sort_Cases(Cases arr[],int first,int last);
+void Quick_Sort_Cases(Cases arr[], int first, int last);
 
 void Quick_Sort_Province(Province arr[], int first, int last);
 
@@ -21,24 +21,25 @@ void P_Cases(string, int);//Funcion que sirve para la consigna de los puntos par
 
 void P_Death(string, int);//Funcion que sirve para la consigna de los puntos para -p_muertes[n]
 
+int stringAinteger(string stringDate);
+
 int main(int argc, char **argv){
     cout<<(256*10)%10<<endl;
     string date = "2020-01-01";
     string path = argv[argc - 1];
     int TotalProv = 0;
-    string datenum = "";
     for(int i=1; i< argc -1 ; i++){
         string argAux=argv[i];
         if(argAux == "-estad"){
             stats(path);
         }else{
         if (argAux == "-casos_cui") {
-            if (argv[i + 1][0] == '[') {
+            if (argv[i + 1][0] >= 48 && argv[i + 1][0] <=57) {
             // Se Revisa si el argumento siguiente a -casos_cui es una fecha, solo funciona para fechas>=2000
                 date = argv[i + 1];
                 i++;
-                cout<<"date: "<<date<<endl;
             }
+            cout<<stringAinteger(date)<<endl;
             Cases_CUI(path, date);
         }else{
              if (argAux == "-p_casos")
@@ -69,6 +70,19 @@ int main(int argc, char **argv){
     }    
     cout<<"Tarea finalizada."<<endl;
     return 0;  
+}
+
+int stringAinteger(string stringDate){
+    string intDate;
+    int num=stringDate.size(), j=0;
+    for(int i=0; i < num ; i++){
+         int aux = stringDate[i];
+        if(aux >= 48 && aux <=57){
+            intDate += stringDate[i];
+            j++;
+        }
+    }
+    return stoi(intDate);
 }
 
 void stats(string path)
@@ -158,30 +172,35 @@ void Quick_Sort_Province(Province arr[], int first, int last)
 }
 
 void Quick_Sort_Cases(Cases arr[], int first, int last){
- int i, j, middle;
+  int i, j, middle;
   Cases pivot, aux;
-  middle = (first+last) / 2;
+
+  middle = (first + last) / 2;
   pivot = arr[middle];
-  i=first;
-  j=last;
+  i = first;
+  j = last;
 
   do {
-    while (arr[i]<pivot)
-      i++;
-    while (arr[j]>pivot)
-      j--;
-
+    while (stringAinteger(arr[i].Date_CUI()) < stringAinteger(pivot.Date_CUI())){
+        i++;
+    }
+    
+    while (stringAinteger(arr[j].Date_CUI()) > stringAinteger(pivot.Date_CUI())){
+        j--;
+    }
     if (i <= j) {
-      aux=arr[i];
-      arr[i]=arr[j];
-      arr[j]=aux;
+      aux = arr[i];
+      arr[i] = arr[j];
+      arr[j] = aux;
       i++;
       j--;
     }
-  } while (i<=j);
-
-  if (j>first) Quick_Sort_Cases(arr, first, j);
-  if (i<last) Quick_Sort_Cases(arr, i, last);
+  } while (i <= j);   
+  if (j > first)
+    Quick_Sort_Cases(arr, first, j);
+  if (i < last)
+    Quick_Sort_Cases(arr, i, last);
+    
 }
 
 void Cases_CUI (string path, string date)
@@ -189,9 +208,11 @@ void Cases_CUI (string path, string date)
     cout<<"--------------------------------------------------------"<<endl;
     cout<<"USTED EJECUTO FECHAS DE LOS CASOS EN CUIDADOS INTENSIVOS"<<endl;
     cout<<"--------------------------------------------------------"<<endl;
-    Lista <Cases> ListCUI;
-    Lista <Cases> ListDatesCUI;
     Cases cases;
+    Lista <int> ListDatesCUI;
+    Lista <Cases> ListCUI;
+
+    
     fstream file;
     file.open(path,ios::in);
     if(file.fail())
@@ -204,26 +225,24 @@ void Cases_CUI (string path, string date)
         while(getline(file,line))
         {
             cases.processLine(line);
-            if(cases.Cui()=="SI" && cases.Date_CUI()>date) {
+            if(cases.Cui()=="SI" && stringAinteger(cases.Date_CUI()) > stringAinteger(date)) {
                 ListCUI.insertarPrimero(cases);
-                ListDatesCUI.insertarPrimero(cases.Date_CUI());
+                ListDatesCUI.insertarPrimero(stringAinteger(cases.Date_CUI()));
             } 
         }
-        Cases ArrayCases[ListCUI.getTamanio()];
-        if(ListCUI.getTamanio()>0)
+        int num=ListCUI.getTamanio();
+        Cases ArrayCases[num];
+        if(num>0)
         {
-            for (int i = 0; i < ListCUI.getTamanio(); i++) 
+            for (int i = 0; i < num; i++) 
             {
-                ArrayCases[i] = ListDatesCUI.getDato(i);
+                ArrayCases[i] = (ListCUI.getDato(i));
             }
-            cout<<"Antes del quicksort"<<endl;
-            Quick_Sort_Cases(ArrayCases, 0, ListCUI.getTamanio());
-            cout<<"despues del quicksort"<<endl;
+            Quick_Sort_Cases(ArrayCases, 0, num-1);
             cout<<"-----------------------------------------------------"<<endl;
-            cout<<"Los Casos mayores a "<<date<<" de forma ordenada son:"<<endl;
-            for (int i = 0; i < ListCUI.getTamanio(); i++) {
-
-                if (ArrayCases[i] > date) {
+            cout<<"Los Casos mayores a "<<date<<" ordenados de mayor a menor son:"<<endl;
+            for (int i = 0; i < num; i++) {
+                if (stringAinteger(ArrayCases[i].Date_CUI()) > stringAinteger(date)) {
                     cout << ArrayCases[i] << endl;
                 }
             }
