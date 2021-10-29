@@ -227,7 +227,6 @@ void Cases_CUI (string path, string date)
     Cases cases;
     Lista <Cases> ListCUI;
 
-    
     fstream file;
     file.open(path,ios::in);
     if(file.fail())
@@ -246,6 +245,7 @@ void Cases_CUI (string path, string date)
         }
         int num=ListCUI.getTamanio();
         Cases ArrayCases[num];
+        int cont=0;
         if(num>0)
         {
             for (int i = 0; i < num; i++) 
@@ -258,10 +258,14 @@ void Cases_CUI (string path, string date)
             for (int i = 0; i < num; i++) {
                 if (stringAinteger(ArrayCases[i].Date_CUI()) > stringAinteger(date)) {
                     cout << ArrayCases[i] << endl;
+                    cont++;
                 }
             }
+            cout<<"-----------------------------------------------------"<<endl;
+            cout<<"La cantidad de casos en cuidados intensivos que hubo en esta fecha es de-> "<<cont<<endl;
         }else
         {
+            cout<<"-----------------------------------------------------"<<endl;
             cout<<"Desde la fecha "<<date<<" no se han detectado Casos en Cuidados Intensivos"<<endl;
         }
     }
