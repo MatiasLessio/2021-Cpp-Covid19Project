@@ -8,6 +8,7 @@ class HashMap
 {
 private:
   HashEntry<K, T> **tabla;
+  
   unsigned int tamanio;
 
   static unsigned int hashFunc(K clave);
@@ -19,7 +20,7 @@ public:
 
   HashMap(unsigned int k, unsigned int (*hashFuncP)(K clave));
 
-  T get(K clave);
+  HashEntry<K,T> *get(K clave);
 
   void put(K clave, T valor);
 
@@ -68,19 +69,12 @@ HashMap<K, T>::~HashMap()
   }
 }
 
-template <class K, class T>
-T HashMap<K, T>::get(K clave)
-{
+template <class K, class T> HashEntry<K,T> *HashMap<K, T>::get(K clave) {
   unsigned int pos = hashFuncP(clave) % tamanio;
-  if (tabla[pos] == NULL)
-  {
-    throw 404;
+  if (tabla[pos] == nullptr) {
+    throw 2;
   }
-  if(tabla[pos]->getClave() == clave){
-    return tabla[pos]->getValor();
-  }else{
-    throw 409;
-  }
+  return tabla[pos];
 }
 
 template <class K, class T>
@@ -90,7 +84,9 @@ void HashMap<K, T>::put(K clave, T valor)
 
   if (tabla[pos] != NULL)
   {
-    //Manejar la Colision!!!!!!!
+    HashEntry<K,T> *aux= new HashEntry<K, T>(clave, valor);
+    aux->setnext(tabla[pos]);
+    tabla[pos]=aux;
     throw 409;
   }
 

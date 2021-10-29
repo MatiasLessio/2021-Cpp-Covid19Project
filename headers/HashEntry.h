@@ -7,12 +7,18 @@ class HashEntry
 private:
     K clave;
     T valor;
+    HashEntry<K, T> *next;
 public:
     HashEntry(K c, T v){
         clave = c;
         valor = v;
     }
-
+    void setnext(HashEntry<K, T> *Next) {
+        next = Next;
+    }
+    HashEntry<K, T> *getnext() {
+        return next;
+    }
     K getClave(){
         return clave;
     }

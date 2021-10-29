@@ -6,6 +6,7 @@
 #include "headers/Lista.h"
 #include "headers/HashMap.h"
 #include "headers/Province.h"
+#include <locale.h>
 
 using namespace std;
 
@@ -23,7 +24,11 @@ void P_Death(string, int);//Funcion que sirve para la consigna de los puntos par
 
 int stringAinteger(string stringDate);
 
-int main(int argc, char **argv){
+void Cases_Age(string);
+
+int main(int argc, char **argv)
+{
+    setlocale(LC_ALL, "spanish");
     cout<<(256*10)%10<<endl;
     string date = "2020-01-01";
     string path = argv[argc - 1];
@@ -63,6 +68,15 @@ int main(int argc, char **argv){
                     TotalProv = 24;
                 }
             P_Death(path, TotalProv);
+        }else
+        {
+            if(argAux== "-casos_edad")
+            {
+            Cases_Age(path);
+            }else
+            {
+                cout<<"Argumento erroneo"<<endl;
+            }
         }
         }
     }
@@ -72,7 +86,8 @@ int main(int argc, char **argv){
     return 0;  
 }
 
-int stringAinteger(string stringDate){
+int stringAinteger(string stringDate)
+{
     string intDate;
     int num=stringDate.size(), j=0;
     for(int i=0; i < num ; i++){
@@ -171,7 +186,8 @@ void Quick_Sort_Province(Province arr[], int first, int last)
     if(i<last) Quick_Sort_Province(arr, i, last);
 }
 
-void Quick_Sort_Cases(Cases arr[], int first, int last){
+void Quick_Sort_Cases(Cases arr[], int first, int last)
+{
   int i, j, middle;
   Cases pivot, aux;
 
@@ -332,5 +348,60 @@ void P_Death(string path, int NumProvince)
         for (int i = 0; i < NumProvince; i++) {
             cout << ProvinciaFallecidos[i] << endl;
        }
+    }
+}
+
+unsigned int Argentina(string states) 
+{
+    const string ListProvince[] = {"Buenos Aires", "CABA", "Catamarca", "Chaco", "Chubut", "Cordoba", "Corrientes",
+                                      "Entre Rios", "Formosa", "Jujuy", "La Pampa", "La Rioja", "Mendoza", "Misiones",
+                                      "Neuquen", "Rio Negro", "Salta", "San Juan", "San Luis", "Santa Cruz", "Santa Fe",
+                                      "Santiago del Estero", "Tierra del Fuego", "Tucuman", "Sin Provincia"};
+    for (int i = 0; i < 25; i++) {
+        if (states == ListProvince[i]) {
+            return i;
+        }
+    }
+}
+
+void Cases_Age(string path) 
+{
+    cout<<"----------------------------"<<endl;
+    cout<<"USTED EJECUTO CASOS POR EDAD"<<endl;
+    cout<<"----------------------------"<<endl;
+
+    const string ListProvince[] = {"Buenos Aires", "CABA", "Catamarca", "Chaco", "Chubut", "Cordoba", "Corrientes",
+                                      "Entre Rios", "Formosa", "Jujuy", "La Pampa", "La Rioja", "Mendoza", "Misiones",
+                                      "Neuquen", "Rio Negro", "Salta", "San Juan", "San Luis", "Santa Cruz", "Santa Fe",
+                                      "Santiago del Estero", "Tierra del Fuego", "Tucuman", "Sin Provincia"};
+    
+    HashMap<string, Cases> HashCases(25, Argentina);
+    Cases cases;
+    fstream file;
+    file.open(path, ios::in);
+    HashEntry<string, Cases> *aux;
+    if (file.fail()) {
+        cout << "No se ha podido abrir el archivo csv" << endl;
+    } else {
+        string line;
+        getline(file, line);
+        while (getline(file, line)) {
+            cases.processLine(line);
+            if (cases.getAniosOMeses() == "Años" &&  cases.getClasificacion() == "Confirmado") {
+                HashCases.put(cases.Provincia(), cases);
+            }
+        }
+        /*for (int i = 0; i < 25; i++) {
+            try {
+                aux = HashCases.get(ListProvince[i]);
+                cout << "La lista de la provincia: " << ListProvince[i] << endl;
+                while (aux != nullptr) {
+                    cout << aux->getValor() << endl;
+                    aux = aux->getnext();
+                }
+            } catch (int e) {
+                cout << "La Provincia: " << ListProvince[i] << " esta vacia" << endl;
+            }
+        }*/
     }
 }
