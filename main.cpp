@@ -298,22 +298,14 @@ void P_Cases(string path, int NumProvince)
                 }
             } 
         }
-
    }
-        if (cases.getClasificacion() == "Confirmado") {
             Quick_Sort_Province(ProvinciaContagiado, 0, 23);
             cout <<"Casos Confirmados por Provincia:"<< endl;
             cout <<"--------------------------------"<<endl;
             for (int i = 0; i < NumProvince; i++) {
             cout << ProvinciaContagiado[i] << endl;
         }
-        }else
-        {
-            if(cases.getClasificacion() == "Descartado" || cases.getClasificacion() == "Sospechoso")
-            {
-                cout<<"No hubo Casos Confirmados de Covid 19 en la muestra"<<endl;
-            }
-        }
+        
 } 
 
 void P_Death(string path, int NumProvince)
@@ -348,21 +340,13 @@ void P_Death(string path, int NumProvince)
                 }
             } 
         }
-        if (cases.getIsDeceased() == "SI") {
         Quick_Sort_Province(ProvinciaFallecidos, 0, 23);
         cout <<"Casos Fallecidos por Provincia:"<< endl;
         cout <<"--------------------------------"<<endl;
         for (int i = 0; i < NumProvince; i++) {
             cout << ProvinciaFallecidos[i] << endl;
        }
-        }else
-        {
-            if(cases.getIsDeceased() == "NO")
-            {
-                cout<<"No hubo Fallecidos por Covid 19 en la muestra"<<endl;
-            }
-        }
-    }
+}
 }
 
 unsigned int Argentina(string states) 
