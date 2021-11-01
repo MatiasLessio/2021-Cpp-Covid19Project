@@ -116,7 +116,7 @@ void Cases::processLine(string line){
             case 3://ANIOS O MESES
                 aniosOmeses = (word);
                 break;
-            case 7://PROVINCIA
+            case 5://PROVINCIA
                 provincia = (word);
                 break;
             case 12://CUI
