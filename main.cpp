@@ -107,15 +107,12 @@ void stats(string path)
     cout<<"USTED EJECUTO: ESTADISTICAS"<<endl;
     cout<<"--------------------------"<<endl;
     fstream file;
-    double numCases=0, numInfected=0, numDeceased=0;
+    long double numCases=0, numInfected=0, numDeceased=0;
     file.open(path, ios::in);
     Cases cases;
-    double ageConfirmed[10]; //0-9/10-19/20-29/30-39/40-49/50-59/60-69/70-79/80-89/90-99
-    double ageDeceased[10]; //0-9/10-19/20-29/30-39/40-49/50-59/60-69/70-79/80-89/90-99
-    for (int i = 0; i<10; i++){
-        ageConfirmed[i]=0;
-        ageDeceased[i]=0;
-    }
+    int ageConfirmed[10]={0,0,0,0,0,0,0,0,0,0}; //0-9/10-19/20-29/30-39/40-49/50-59/60-69/70-79/80-89/90-99
+    int ageDeceased[10]={0,0,0,0,0,0,0,0,0,0}; //0-9/10-19/20-29/30-39/40-49/50-59/60-69/70-79/80-89/90-99
+    
     if(file.fail()){
         cout<<"No pudo abrir el archivo csv."<<endl;
         return;

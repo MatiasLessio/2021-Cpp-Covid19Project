@@ -13,7 +13,7 @@ using namespace std;
 class Province {
 private:
         string NameProv;
-        long int contador;
+        double contador;
 public:
         Province(){
             NameProv="N/A";
