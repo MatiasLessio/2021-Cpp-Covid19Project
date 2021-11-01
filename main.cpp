@@ -30,7 +30,6 @@ void Cases_Age(string path, string age);
 
 int main(int argc, char **argv)
 {
-    
     setlocale(LC_ALL, "spanish");
     string date = "2020-01-01";
     string path = argv[argc - 1];
@@ -162,8 +161,6 @@ void stats(string path)
     }
     cout<<"-------------------------------------"<<endl;
 }
-
-
 
 void Quick_Sort_Cases(Cases arr[], int first, int last)
 {
@@ -331,20 +328,6 @@ void P_Death(string path, int NumProvince)
 cout<<"-------------------------------------"<<endl;
 }
 
-unsigned int Argentina(string states) 
-{
-    int idx = 0;
-    const string ListProvince[] = {"Buenos Aires", "CABA", "Catamarca", "Chaco", "Chubut", "Cordoba", "Corrientes",
-                                      "Entre Rios", "Formosa", "Jujuy", "La Pampa", "La Rioja", "Mendoza", "Misiones",
-                                      "Neuquen", "Rio Negro", "Salta", "San Juan", "San Luis", "Santa Cruz", "Santa Fe",
-                                      "Santiago del Estero", "Tierra del Fuego", "Tucuman", "Sin Provincia"};
-    for (int i = 0; i < 25; i++) {
-        if (states == ListProvince[i]) {
-            idx += states[i]*2;
-        }
-    }
-    return idx;
-}
 void Quick_Sort_Province(Province arr[], int first, int last)
 {
     int i, j, medio;
@@ -381,13 +364,13 @@ void Quick_Sort_Province_Age(Cases arr[], int first, int last)
     j=last;
     do
     {
-        while(arr[i].Provincia_Id()>pivot.Provincia_Id()) i++;
-        while(arr[j].Provincia_Id()<pivot.Provincia_Id()) j--;
+        while(arr[i].Provincia_Id()<pivot.Provincia_Id()) i++;
+        while(arr[j].Provincia_Id()>pivot.Provincia_Id()) j--;
         if(i<=j)
         {
-            aux=arr[j];
-            arr[j]=arr[i];
-            arr[i]=aux;
+            aux=arr[i];
+            arr[i]=arr[j];
+            arr[j]=aux;
             i++;
             j--;
         }
@@ -418,7 +401,6 @@ void Cases_Age(string path, string age)
                     Listita.insertarPrimero(cases);
                 }
             }
-            
         }
         int num= Listita.getTamanio();
         if(stoi(age)==-1){
@@ -433,7 +415,7 @@ void Cases_Age(string path, string age)
             {
                 ArrayCases[i] = (Listita.getDato(i));
             }
-            Quick_Sort_Province_Age(ArrayCases, 0, num);
+            Quick_Sort_Province_Age(ArrayCases, 0, num-1);
             cout<<"-----------------------------------------------------"<<endl;
             for (int i = 0; i < num; i++) {
                 cout<<ArrayCases[i]<<endl;

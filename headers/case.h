@@ -128,7 +128,7 @@ void Cases::processLine(string line){
             case 14://FALLECIO?
                 isDeceased= (word);
                 break;
-            case 17://ID PROVINCIA
+            case 21://ID PROVINCIA
                 idProvincia = (stoi(word));
                 break;
             case 20://CLASIFICACION
