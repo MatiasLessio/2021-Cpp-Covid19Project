@@ -1,37 +1,38 @@
-#ifndef PARCIAL2_HASHENTRY_H
-#define PARCIAL2_HASHENTRY_H
+#ifndef U05_HASH_HASHMAP_HASHENTRY_H_
+#define U05_HASH_HASHMAP_HASHENTRY_H_
 
-template <class K, class T>
-class HashEntry
-{
+template<class K, class T>
+class HashEntry {
 private:
-    K clave;
-    T valor;
+    K key;
+    T data;
     HashEntry<K, T> *next;
 public:
-    HashEntry(K c, T v){
-        clave = c;
-        valor = v;
-    }
+    HashEntry(K k, T d) : key(k), data(d) {}
+
     void setnext(HashEntry<K, T> *Next) {
         next = Next;
     }
+
     HashEntry<K, T> *getnext() {
         return next;
     }
-    K getClave(){
-        return clave;
-    }
-    void setClave(K c){
-        clave = c;
+
+    K getKey() {
+        return key;
     }
 
-    T getValor(){
-        return valor;
+    void setKey(K key) {
+        HashEntry::key = key;
     }
-    void setValor(T v){
-        valor = v;
+
+    T getData() {
+        return data;
+    }
+
+    void setData(T data) {
+        HashEntry::data = data;
     }
 };
 
-#endif // PARCIAL2_HASHENTRY_H
+#endif // U05_HASH_HASHMAP_HASHENTRY_H_

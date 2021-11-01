@@ -1,24 +1,22 @@
-#ifndef PARCIAL2_HASHMAP_H
-#define PARCIAL2_HASHMAP_H
-
+#ifndef U05_HASH_HASHMAP_HASHMAP_H_
+#define U05_HASH_HASHMAP_HASHMAP_H_
 #include "HashEntry.h"
-
-template <class K, class T>
-class HashMap
-{
+#include <iostream>
+using namespace std;
+template <class K, class T> class HashMap {
 private:
-  HashEntry<K, T> **tabla;
-  
-  unsigned int tamanio;
+  HashEntry<K, T> **table;
+
+  unsigned int size;
 
   static unsigned int hashFunc(K clave);
 
   unsigned int (*hashFuncP)(K clave);
 
 public:
-  explicit HashMap(unsigned int k);
+  explicit HashMap(unsigned int size);
 
-  HashMap(unsigned int k, unsigned int (*hashFuncP)(K clave));
+  HashMap(unsigned int size, unsigned int (*hashFuncP)(K clave));
 
   HashEntry<K,T> *get(K clave);
 
@@ -33,108 +31,82 @@ public:
   void print();
 };
 
-template <class K, class T>
-HashMap<K, T>::HashMap(unsigned int k)
-{
-  tamanio = k;
-  tabla = new HashEntry<K, T> *[tamanio];
-  for (int i = 0; i < tamanio; i++)
-  {
-    tabla[i] = NULL;
-  }
+template <class K, class T> HashMap<K, T>::HashMap(unsigned int size) {
+  this->size = size;
   hashFuncP = hashFunc;
-}
-
-template <class K, class T>
-HashMap<K, T>::HashMap(unsigned int k, unsigned int (*fp)(K))
-{
-  tamanio = k;
-  tabla = new HashEntry<K, T> *[tamanio];
-  for (int i = 0; i < tamanio; i++)
-  {
-    tabla[i] = NULL;
+  table = new HashEntry<K, T> *[size];
+  for (int i = 0; i < size; i++) {
+    table[i] = nullptr;
   }
-  hashFuncP = fp;
 }
 
-template <class K, class T>
-HashMap<K, T>::~HashMap()
-{
-  for (int i = 0; i < tamanio; i++)
-  {
-    if (tabla[i] != NULL)
-    {
-      delete tabla[i];
+template <class K, class T> HashMap<K, T>::~HashMap() {
+  for (int i = 0; i < size; i++) {
+    if (table[i] != nullptr) {
+      delete table[i];
     }
   }
 }
 
 template <class K, class T> HashEntry<K,T> *HashMap<K, T>::get(K clave) {
-  unsigned int pos = hashFuncP(clave) % tamanio;
-  if (tabla[pos] == nullptr) {
-    throw 2;
+  unsigned int pos = hashFuncP(clave) % size;
+  if (table[pos] == nullptr) {
+    cout<<"[ERROR HASH]"<<endl;
   }
-  return tabla[pos];
+  return table[pos];
 }
 
-template <class K, class T>
-void HashMap<K, T>::put(K clave, T valor)
-{
-  unsigned int pos = hashFuncP(clave) % tamanio;
+template <class K, class T> void HashMap<K, T>::put(K clave, T valor) {
+  unsigned int pos = hashFuncP(clave) % size;
 
-  if (tabla[pos] != NULL)
-  {
+  if (table[pos] != nullptr) {
     HashEntry<K,T> *aux= new HashEntry<K, T>(clave, valor);
-    aux->setnext(tabla[pos]);
-    tabla[pos]=aux;
-    throw 409;
+    aux->setnext(table[pos]);
+    table[pos]=aux;
+    return;
   }
-
-  tabla[pos] = new HashEntry<K, T>(clave, valor); //Corresponde a una fila en la tabla HASH
+  table[pos] = new HashEntry<K, T>(clave, valor);
 }
 
-template <class K, class T>
-void HashMap<K, T>::remove(K clave) {}
+template <class K, class T> void HashMap<K, T>::remove(K clave) {}
 
-template <class K, class T>
-bool HashMap<K, T>::esVacio()
-{
-  for (int i = 0; i < tamanio; i++)
-  {
-    if (tabla[i] != NULL)
-    {
+template <class K, class T> bool HashMap<K, T>::esVacio() {
+  for (int i = 0; i < size; i++) {
+    if (table[i] != nullptr) {
       return false;
     }
   }
   return true;
 }
 
-template <class K, class T>
-unsigned int HashMap<K, T>::hashFunc(K clave)
-{
+template <class K, class T> unsigned int HashMap<K, T>::hashFunc(K clave) {
   return (unsigned int)clave;
 }
 
 template <class K, class T>
-void HashMap<K, T>::print()
-{
-
-  std::cout << "i"
-            << " "
-            << "Clave"
-            << "\t\t"
-            << "Valor" << std::endl;
-  std::cout << "--------------------" << std::endl;
-  for (int i = 0; i < tamanio; i++)
-  {
-    std::cout << i << " ";
-    if (tabla[i] != NULL)
-    {
-      std::cout << tabla[i]->getClave() << "\t\t";
-      std::cout << tabla[i]->getValor();
-    }
-    std::cout << std::endl;
+HashMap<K, T>::HashMap(unsigned int size, unsigned int (*fp)(K)) {
+  this->size = size;
+  hashFuncP = fp;
+  table = new HashEntry<K, T> *[size];
+  for (int i = 0; i < size; i++) {
+    table[i] = nullptr;
   }
 }
 
-#endif // PARCIAL2_HASHMAP_H
+template <class K, class T> void HashMap<K, T>::print() {
+  for (int i = 0; i < size; i++) {
+    cout << "Indice"
+         << "\t"
+         << "Clave"
+         << "\t"
+         << "Dato" << endl;
+    cout << "____________________________________________" << endl;
+    cout << i << "\t";
+    if (table[i] != nullptr) {
+      cout << table[i]->getKey() << "\t";
+      cout << table[i]->getData();
+    }
+    cout << endl;
+  }
+}
+#endif // U05_HASH_HASHMAP_HASHMAP_H_
