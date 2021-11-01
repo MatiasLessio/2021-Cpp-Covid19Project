@@ -107,11 +107,11 @@ void stats(string path)
     cout<<"USTED EJECUTO: ESTADISTICAS"<<endl;
     cout<<"--------------------------"<<endl;
     fstream file;
-    long int numCases=0, numInfected=0, numDeceased=0;
+    double numCases=0, numInfected=0, numDeceased=0;
     file.open(path, ios::in);
     Cases cases;
-    int ageConfirmed[10]; //0-9/10-19/20-29/30-39/40-49/50-59/60-69/70-79/80-89/90-99
-    int ageDeceased[10]; //0-9/10-19/20-29/30-39/40-49/50-59/60-69/70-79/80-89/90-99
+    double ageConfirmed[10]; //0-9/10-19/20-29/30-39/40-49/50-59/60-69/70-79/80-89/90-99
+    double ageDeceased[10]; //0-9/10-19/20-29/30-39/40-49/50-59/60-69/70-79/80-89/90-99
     for (int i = 0; i<10; i++){
         ageConfirmed[i]=0;
         ageDeceased[i]=0;
@@ -142,8 +142,8 @@ void stats(string path)
             }
         }
     }
-    long int pDeceased = ((numDeceased * 100) / numCases);//calculamos el porcentaje de muertos
-    long int pInfected = ((numInfected * 100) / numCases);//calculamos el porcentaje de infectados
+    float pDeceased = ((numDeceased * 100) / numInfected);//calculamos el porcentaje de muertos
+    float pInfected = ((numInfected * 100) / numCases);//calculamos el porcentaje de infectados
     cout<< "Cantidad de casos estudiados, (muestra), -> "<<numCases<<endl;
     cout<< "Cantidad total de infectados-> "<<numInfected<<endl;
     cout<< "Cantidad de fallecidos-> "<<numDeceased<<endl;
@@ -402,7 +402,7 @@ void Cases_Age(string path, string age)
                 }
             }
         }
-        int num= Listita.getTamanio();
+        int num = Listita.getTamanio();
         if(stoi(age)==-1){
             cout<<"NO SE INGRESO UNA EDAD\nPara ejecutar esta funcion debe ingresar una edad como parametro."<<endl;
             cout<<"-------------------------------------"<<endl;
