@@ -107,7 +107,7 @@ void stats(string path)
     cout<<"USTED EJECUTO: ESTADISTICAS"<<endl;
     cout<<"--------------------------"<<endl;
     fstream file;
-    float numCases=0, numInfected=0, numDeceased=0;
+    long int numCases=0, numInfected=0, numDeceased=0;
     file.open(path, ios::in);
     Cases cases;
     int ageConfirmed[10]; //0-9/10-19/20-29/30-39/40-49/50-59/60-69/70-79/80-89/90-99
@@ -142,8 +142,8 @@ void stats(string path)
             }
         }
     }
-    float pDeceased = ((numDeceased * 100) / numCases);//calculamos el porcentaje de muertos
-    float pInfected = ((numInfected * 100) / numCases);//calculamos el porcentaje de infectados
+    long int pDeceased = ((numDeceased * 100) / numCases);//calculamos el porcentaje de muertos
+    long int pInfected = ((numInfected * 100) / numCases);//calculamos el porcentaje de infectados
     cout<< "Cantidad de casos estudiados, (muestra), -> "<<numCases<<endl;
     cout<< "Cantidad total de infectados-> "<<numInfected<<endl;
     cout<< "Cantidad de fallecidos-> "<<numDeceased<<endl;
