@@ -199,8 +199,6 @@ void Cases_CUI (string path, string date)
     cout<<"--------------------------------------------------------"<<endl;
     Cases cases;
     Lista <Cases> ListCUI;
-
-    
     fstream file;
     file.open(path,ios::in);
     if(file.fail())
