@@ -215,18 +215,18 @@ void Cases_CUI (string path, string date)
                 ListCUI.insertarPrimero(cases);
             } 
         }
-        long int num=ListCUI.getTamanio();
+        int num=ListCUI.getTamanio();
         Cases ArrayCases[num];
         if(num>0)
         {
-            for (long int i = 0; i < num; i++) 
+            for (int i = 0; i < num; i++) 
             {
                 ArrayCases[i] = (ListCUI.getDato(i));
             }
             Quick_Sort_Cases(ArrayCases, 0, num-1);
             cout<<"-----------------------------------------------------"<<endl;
             cout<<"Los Casos mayores a "<<date<<" ordenados de mayor a menor son:"<<endl;
-            for (long int i = 0; i < num; i++) {
+            for (int i = 0; i < num; i++) {
                 if (stringAinteger(ArrayCases[i].Date_CUI()) > stringAinteger(date)) {
                     cout << ArrayCases[i] << endl;
                 }
@@ -397,7 +397,7 @@ void Cases_Age(string path, string age)
                 }
             }
         }
-        long int num = Listita.getTamanio();
+        int num = Listita.getTamanio();
         if(stoi(age)==-1){
             cout<<"NO SE INGRESO UNA EDAD\nPara ejecutar esta funcion debe ingresar una edad como parametro."<<endl;
             cout<<"-------------------------------------"<<endl;
@@ -406,13 +406,13 @@ void Cases_Age(string path, string age)
         Cases ArrayCases[num];
         if(num>0)
         {
-            for (long int i = 0; i < num; i++) 
+            for (int i = 0; i < num; i++) 
             {
                 ArrayCases[i] = (Listita.getDato(i));
             }
             Quick_Sort_Province_Age(ArrayCases, 0, num-1);
             cout<<"-----------------------------------------------------"<<endl;
-            for (long int i = 0; i < num; i++) {
+            for (int i = 0; i < num; i++) {
                 cout<<ArrayCases[i]<<endl;
                 
             }
