@@ -15,6 +15,6 @@
 ## Tiempo de Ejecucucion de las Funciones
 * **-estad:** 85 seg (Aprox)
 *  **-casos_cui:** ___ seg (Aprox)
-*  **-p_casos:** 84 seg (Aprox)
-*  **-p_muertes:** 79 seg (Aprox)
+*  **-p_casos:** 82 seg (Aprox)
+*  **-p_muertes:** 80 seg (Aprox)
 *  **-casos_edad:** ___ seg (Aprox)

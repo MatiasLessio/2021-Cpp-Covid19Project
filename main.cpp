@@ -217,18 +217,18 @@ void Cases_CUI (string path, string date)
                 ListCUI.insertarPrimero(cases);
             } 
         }
-        int num=ListCUI.getTamanio();
+        long int num=ListCUI.getTamanio();
         Cases ArrayCases[num];
         if(num>0)
         {
-            for (int i = 0; i < num; i++) 
+            for (long int i = 0; i < num; i++) 
             {
                 ArrayCases[i] = (ListCUI.getDato(i));
             }
             Quick_Sort_Cases(ArrayCases, 0, num-1);
             cout<<"-----------------------------------------------------"<<endl;
             cout<<"Los Casos mayores a "<<date<<" ordenados de mayor a menor son:"<<endl;
-            for (int i = 0; i < num; i++) {
+            for (long int i = 0; i < num; i++) {
                 if (stringAinteger(ArrayCases[i].Date_CUI()) > stringAinteger(date)) {
                     cout << ArrayCases[i] << endl;
                 }
@@ -246,10 +246,10 @@ void P_Cases(string path, int NumProvince)
     cout<<"-------------------------------------"<<endl;
     cout<<"USTED EJECUTO: CONTAGIOS POR PROVINCIA"<<endl;
     cout<<"-------------------------------------"<<endl;
-    const string ListProvince[] = {"CABA", "Buenos Aires", "Catamarca", "Chaco", "Chubut", "Cordoba", "Corrientes",
-                                      "Entre Rios", "Formosa", "Jujuy", "La Pampa", "La Rioja", "Mendoza", "Misiones",
-                                      "Neuquen", "Rio Negro", "Salta", "San Juan", "San Luis", "Santa Cruz", "Santa Fe",
-                                      "Santiago del Estero", "Tierra del Fuego", "Tucuman"};
+    const string ListProvince[] = {"CABA", "Buenos Aires", "Catamarca", "Chaco", "Chubut", "Córdoba", "Corrientes",
+                                      "Entre Ríos", "Formosa", "Jujuy", "La Pampa", "La Rioja", "Mendoza", "Misiones",
+                                      "Neuquén", "Río Negro", "Salta", "San Juan", "San Luis", "Santa Cruz", "Santa Fe",
+                                      "Santiago del Estero", "Tierra del Fuego", "Tucumán"};
     Province ProvinciaContagiado[24];
     for (int i = 0; i < 24; i++) {
         ProvinciaContagiado[i] = Province(ListProvince[i], 0);
@@ -288,10 +288,10 @@ void P_Death(string path, int NumProvince)
     cout<<"-------------------------------------"<<endl;
     cout<<"USTED EJECUTO: MUERTES POR PROVINCIA"<<endl;
     cout<<"-------------------------------------"<<endl;
-    const string ListProvince[] = {"CABA", "Buenos Aires", "Catamarca", "Chaco", "Chubut", "Cordoba", "Corrientes",
-                                      "Entre Rios", "Formosa", "Jujuy", "La Pampa", "La Rioja", "Mendoza", "Misiones",
-                                      "Neuquen", "Rio Negro", "Salta", "San Juan", "San Luis", "Santa Cruz", "Santa Fe",
-                                      "Santiago del Estero", "Tierra del Fuego", "Tucuman"};
+    const string ListProvince[] = {"CABA", "Buenos Aires", "Catamarca", "Chaco", "Chubut", "Córdoba", "Corrientes",
+                                      "Entre Ríos", "Formosa", "Jujuy", "La Pampa", "La Rioja", "Mendoza", "Misiones",
+                                      "Neuquén", "Río Negro", "Salta", "San Juan", "San Luis", "Santa Cruz", "Santa Fe",
+                                      "Santiago del Estero", "Tierra del Fuego", "Tucumán"};
     Province ProvinciaFallecidos[24];
     for (int i = 0; i < 24; i++) {
         ProvinciaFallecidos[i] = Province(ListProvince[i], 0);
@@ -399,7 +399,7 @@ void Cases_Age(string path, string age)
                 }
             }
         }
-        int num = Listita.getTamanio();
+        long int num = Listita.getTamanio();
         if(stoi(age)==-1){
             cout<<"NO SE INGRESO UNA EDAD\nPara ejecutar esta funcion debe ingresar una edad como parametro."<<endl;
             cout<<"-------------------------------------"<<endl;
@@ -408,13 +408,13 @@ void Cases_Age(string path, string age)
         Cases ArrayCases[num];
         if(num>0)
         {
-            for (int i = 0; i < num; i++) 
+            for (long int i = 0; i < num; i++) 
             {
                 ArrayCases[i] = (Listita.getDato(i));
             }
             Quick_Sort_Province_Age(ArrayCases, 0, num-1);
             cout<<"-----------------------------------------------------"<<endl;
-            for (int i = 0; i < num; i++) {
+            for (long int i = 0; i < num; i++) {
                 cout<<ArrayCases[i]<<endl;
                 
             }
