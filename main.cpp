@@ -15,11 +15,7 @@ using namespace std;
 
 void stats(string path);//Funcion que sirve para la consigna de los puntos para -estad
 
-void Quick_Sort_Cases(Cases arr[], int first, int last);
-
 void Quick_Sort_Province(Province arr[], int first, int last);
-
-void Quick_Sort_Province_Age(Cases arr[], int first, int last);
 
 void Cases_CUI (string, string date);//Funcion que sirve para la consigna de los puntos para -casos_cui[fecha]
 
@@ -29,7 +25,7 @@ void P_Death(string, int);//Funcion que sirve para la consigna de los puntos par
 
 int stringAinteger(string stringDate);
 
-void Cases_Age(string path, string age);
+void Cases_Age(string path, string age);//Funcion que sirve para la consigna de los puntos para -casos_edad[n]
 
 int main(int argc, char **argv)
 {
@@ -121,8 +117,7 @@ void stats(string path)
     string line;
     Cases cases;
     long double numCases=0, numInfected=0, numDeceased=0;
-    
-    
+    float pDeceased, pInfected;
     int ageConfirmed[10]={0,0,0,0,0,0,0,0,0,0}; //0-9/10-19/20-29/30-39/40-49/50-59/60-69/70-79/80-89/90-99
     int ageDeceased[10]={0,0,0,0,0,0,0,0,0,0}; //0-9/10-19/20-29/30-39/40-49/50-59/60-69/70-79/80-89/90-99
     file.open(path, ios::in);
@@ -135,25 +130,32 @@ void stats(string path)
         while(getline(file, line)){
             cases.processLine(line);
             numCases++;
-            if(cases.getClasificacion()== "Confirmado"){
+            if(cases.getClasificacion()){
                 numInfected++;
                 if(cases.getAniosOMeses() == "Meses"){
                     ageConfirmed[0]++;
                 } else {
-                    ageConfirmed[cases.getAge() / 10]++;
+                    if(cases.getAniosOMeses() == "Años")
+                    {
+                        ageConfirmed[cases.getAge() / 10]++;  
+                    }
+                    
                 }
-            } else if (cases.getIsDeceased()== "SI"){
+            } else if (cases.getIsDeceased()){
                 numDeceased++;
                 if(cases.getAniosOMeses()== "Meses"){
                     ageDeceased[0]++;
                 } else {
-                    ageDeceased[cases.getAge()/10]++;
+                    if(cases.getAniosOMeses() == "Años")
+                    {
+                        ageDeceased[cases.getAge()/10]++;
+                    }
                 }
             }
         }
     }
-    float pDeceased = ((numDeceased * 100) / numInfected);//calculamos el porcentaje de muertos
-    float pInfected = ((numInfected * 100) / numCases);//calculamos el porcentaje de infectados
+    pDeceased = ((numDeceased * 100) / numInfected);//calculamos el porcentaje de muertos
+    pInfected = ((numInfected * 100) / numCases);//calculamos el porcentaje de infectados
     cout<< "Cantidad de casos estudiados, (muestra), -> "<<numCases<<endl;
     cout<< "Cantidad total de infectados-> "<<numInfected<<endl;
     cout<< "Cantidad de fallecidos-> "<<numDeceased<<endl;
@@ -237,7 +239,7 @@ void P_Cases(string path, int NumProvince)
         getline(file, line);
         while (getline(file, line)) {
             cases.processLine(line);
-            if (cases.getClasificacion() == "Confirmado") {
+            if (cases.getClasificacion()) {
                 for (int k = 0; k < 24; k++) {
                     if (cases.Provincia() == ProvinciaContagiado[k].getname()) {
                         ProvinciaContagiado[k].AumentarContador();
@@ -279,7 +281,7 @@ void P_Death(string path, int NumProvince)
         getline(file, line);
         while (getline(file, line)) {
             cases.processLine(line);
-            if (cases.getIsDeceased() == "SI") {
+            if (cases.getIsDeceased()) {
                 for (int k = 0; k < 24; k++) {
                     if (cases.Provincia() == ProvinciaFallecidos[k].getname()) {
                         ProvinciaFallecidos[k].AumentarContador();

@@ -54,9 +54,9 @@ public:
 
     string getAniosOMeses();
 
-    string getIsDeceased();
+    bool getIsDeceased();
 
-    string getClasificacion();
+    bool getClasificacion();
     
     string Cui();
     
@@ -178,11 +178,11 @@ int Cases::Provincia_Id(){
 string Cases::getAniosOMeses() {
     return aniosOmeses;
 }
-string Cases::getIsDeceased(){
-    return isDeceased;
+bool Cases::getIsDeceased(){
+    return isDeceased=="SI";
 }
-string Cases::getClasificacion() {
-    return clasificacion;
+bool Cases::getClasificacion() {
+    return clasificacion=="Confirmado";
 }    
 string Cases::Cui() {
     return CUI;

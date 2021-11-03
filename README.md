@@ -13,8 +13,8 @@
 |2000049@ucc.edu.ar|Santiago|
 
 ## Tiempo de Ejecucucion de las Funciones
-* **-estad:** 85 seg (Aprox)
-*  **-casos_cui:** ___ seg (Aprox)
-*  **-p_casos:** 82 seg (Aprox)
-*  **-p_muertes:** 80 seg (Aprox)
-*  **-casos_edad:** ___ seg (Aprox)
+* **-estad:** 95 seg (Aprox)
+*  **-casos_cui:** 410.469 seg
+*  **-p_casos:** 94.935 seg
+*  **-p_muertes:** 100.897 seg
+*  **-casos_edad:** 419.031 seg
