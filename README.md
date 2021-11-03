@@ -15,6 +15,6 @@
 ## Tiempo de Ejecucucion de las Funciones
 * **-estad:** 95 seg (Aprox)
 *  **-casos_cui:** 410.469 seg
-*  **-p_casos:** 94.935 seg
-*  **-p_muertes:** 100.897 seg
-*  **-casos_edad:** 419.031 seg
+*  **-p_casos:** 83.214 seg
+*  **-p_muertes:** 93.825 seg
+*  **-casos_edad:** 419.031 seg (con la edad de 55 años). Depende de la edad que se elija

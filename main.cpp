@@ -23,7 +23,7 @@ void P_Cases(string, int);//Funcion que sirve para la consigna de los puntos par
 
 void P_Death(string, int);//Funcion que sirve para la consigna de los puntos para -p_muertes[n]
 
-int stringAinteger(string stringDate);
+int stringAinteger(string stringDate); //Funcion para convertir una fecha 2020-01-01 a 20200101
 
 void Cases_Age(string path, string age);//Funcion que sirve para la consigna de los puntos para -casos_edad[n]
 
@@ -110,9 +110,9 @@ int stringAinteger(string stringDate)
 
 void stats(string path)
 {
-    cout<<"--------------------------"<<endl;
+    cout<<"---------------------------"<<endl;
     cout<<"USTED EJECUTO: ESTADISTICAS"<<endl;
-    cout<<"--------------------------"<<endl;
+    cout<<"---------------------------"<<endl;
     fstream file;
     string line;
     Cases cases;
@@ -125,7 +125,6 @@ void stats(string path)
         cout<<"No pudo abrir el archivo csv."<<endl;
         return;
     } else {
-        
         getline(file, line);
         while(getline(file, line)){
             cases.processLine(line);
@@ -164,21 +163,21 @@ void stats(string path)
     cout<<"----------------------------------------------"<<endl;
     cout<<"Contagiados por rango de edad."<<endl;
     for (int i = 0; i < 10; i++) {
-        cout << "Entre " << i * 10 << " y " << (i * 10) + 9 << " anios es: " << ageConfirmed[i] << endl;
+        cout << "Entre " << i * 10 << " y " << ((i+1) * 10) - 1 << " anios es: " << ageConfirmed[i] << endl;
     }
     cout<<"----------------------------------------------"<<endl;
     cout<<"Fallecidos por rango de edad."<<endl;
     for (int i = 0; i < 10; i++) {
-        cout << "Entre " << i * 10 << " y " << (i * 10) + 9 << " anios es: " << ageDeceased[i] << endl;
+        cout << "Entre " << i * 10 << " y " << ((i+1) * 10) - 1 << " anios es: " << ageDeceased[i] << endl;
     }
     cout<<"-------------------------------------"<<endl;
 }
 
 void Cases_CUI (string path, string date)
 {
-    cout<<"--------------------------------------------------------"<<endl;
+    cout<<"---------------------------------------------------------"<<endl;
     cout<<"USTED EJECUTO: FECHAS DE LOS CASOS EN CUIDADOS INTENSIVOS"<<endl;
-    cout<<"--------------------------------------------------------"<<endl;
+    cout<<"---------------------------------------------------------"<<endl;
     
     vector<string> row;
     string line, word;
@@ -218,9 +217,9 @@ void Cases_CUI (string path, string date)
 
 void P_Cases(string path, int NumProvince)
 {
-    cout<<"-------------------------------------"<<endl;
+    cout<<"--------------------------------------"<<endl;
     cout<<"USTED EJECUTO: CONTAGIOS POR PROVINCIA"<<endl;
-    cout<<"-------------------------------------"<<endl;
+    cout<<"--------------------------------------"<<endl;
     const string ListProvince[] = {"CABA", "Buenos Aires", "Catamarca", "Chaco", "Chubut", "Córdoba", "Corrientes",
                                       "Entre Ríos", "Formosa", "Jujuy", "La Pampa", "La Rioja", "Mendoza", "Misiones",
                                       "Neuquén", "Río Negro", "Salta", "San Juan", "San Luis", "Santa Cruz", "Santa Fe",
@@ -243,7 +242,7 @@ void P_Cases(string path, int NumProvince)
                 for (int k = 0; k < 24; k++) {
                     if (cases.Provincia() == ProvinciaContagiado[k].getname()) {
                         ProvinciaContagiado[k].AumentarContador();
-                        break;
+                        //break;
                     }
                 }
             } 
@@ -260,9 +259,9 @@ void P_Cases(string path, int NumProvince)
 
 void P_Death(string path, int NumProvince)
 {
-    cout<<"-------------------------------------"<<endl;
+    cout<<"------------------------------------"<<endl;
     cout<<"USTED EJECUTO: MUERTES POR PROVINCIA"<<endl;
-    cout<<"-------------------------------------"<<endl;
+    cout<<"------------------------------------"<<endl;
     const string ListProvince[] = {"CABA", "Buenos Aires", "Catamarca", "Chaco", "Chubut", "Córdoba", "Corrientes",
                                       "Entre Ríos", "Formosa", "Jujuy", "La Pampa", "La Rioja", "Mendoza", "Misiones",
                                       "Neuquén", "Río Negro", "Salta", "San Juan", "San Luis", "Santa Cruz", "Santa Fe",
@@ -329,9 +328,9 @@ void Quick_Sort_Province(Province arr[], int first, int last)
 void Cases_Age(string path, string age) 
 {
     int age_  = stoi(age);
-    cout<<"----------------------------"<<endl;
+    cout<<"-----------------------------"<<endl;
     cout<<"USTED EJECUTO: CASOS POR EDAD"<<endl;
-    cout<<"----------------------------"<<endl;
+    cout<<"-----------------------------"<<endl;
     if(age_ == -1){
         cout<<"NO SE INGRESO UNA EDAD\nPara ejecutar esta funcion debe ingresar una edad como parametro."<<endl;
         cout<<"-------------------------------------"<<endl;
@@ -373,7 +372,7 @@ void Cases_Age(string path, string age)
     }
         arbol.inorder();
         cout<<"-----------------------------------------------------"<<endl;
-        cout<<"Un total de "<<num<<" casos confirmados con la edad de "<<age<<"."<<endl;
+        cout<<"Un total de "<<num<<" casos confirmados con la edad de "<<age<<" años."<<endl;
     }
-    cout<<"-----------------------------------------------------"<<endl;
+        cout<<"-----------------------------------------------------"<<endl;
 }
