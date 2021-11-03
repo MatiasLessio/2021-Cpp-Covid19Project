@@ -188,6 +188,7 @@ void Cases_CUI (string path, string date)
     if(file.fail())
     {
         cout<<"No se ha podido Abrir el archivo cvs"<<endl;
+        return;
     }else
     {
         while(getline(file,line))
@@ -233,6 +234,7 @@ void P_Cases(string path, int NumProvince)
     Cases cases;
     if (file.fail()) {
         cout << "No se ha podido abrir el archivo csv" << endl;
+        return;
     } else {
         string line;
         getline(file, line);
@@ -275,6 +277,7 @@ void P_Death(string path, int NumProvince)
     Cases cases;
     if (file.fail()) {
         cout << "No se ha podido abrir el archivo csv" << endl;
+        return;
     } else {
         string line;
         getline(file, line);
@@ -345,6 +348,7 @@ void Cases_Age(string path, string age)
     long int num=0;
     if (file.fail()) {
         cout << "No se ha podido abrir el archivo csv" << endl;
+        return;
 
     } else {
     while(getline(file, line)) {
