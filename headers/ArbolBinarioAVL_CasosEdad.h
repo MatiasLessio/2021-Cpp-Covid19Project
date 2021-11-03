@@ -4,8 +4,8 @@
 #include "./NodoArbolAVL_CasosEdad.h"
 
 template <class T>
-class ArbolBinarioAVL_CasosEdad
-{
+class ArbolBinarioAVL_CasosEdad{
+
 protected:
 
   NodoArbolAVL_CasosEdad<T> *root;
@@ -19,11 +19,7 @@ public:
 
   void remove(T data);
 
-  void preorder();
-
   void inorder();
-
-  void postorder();
 
   ~ArbolBinarioAVL_CasosEdad();
 
@@ -35,9 +31,9 @@ public:
 
 private:
   T search(T data, NodoArbolAVL_CasosEdad<T> *r);
-  void preorder(NodoArbolAVL_CasosEdad<T> *r);
+
   void inorder(NodoArbolAVL_CasosEdad<T> *r);
-  void postorder(NodoArbolAVL_CasosEdad<T> *r);
+
 
   int max(int a, int b);
   int calculateHeight(NodoArbolAVL_CasosEdad<T> *r);
@@ -72,14 +68,14 @@ ArbolBinarioAVL_CasosEdad<T>::~ArbolBinarioAVL_CasosEdad() {}
  * @return el valor buscado
  */
 template <class T>
-T ArbolBinarioAVL_CasosEdad<T>::search(T data)
-{
+T ArbolBinarioAVL_CasosEdad<T>::search(T data){
+
   return search(data, root);
 }
 
 template <class T>
-T ArbolBinarioAVL_CasosEdad<T>::search(T data, NodoArbolAVL_CasosEdad<T> *r)
-{
+T ArbolBinarioAVL_CasosEdad<T>::search(T data, NodoArbolAVL_CasosEdad<T> *r){
+
   if (r == nullptr)
   {
     throw 404;
@@ -109,27 +105,22 @@ template <class T>
 void ArbolBinarioAVL_CasosEdad<T>::put(T data) { root = put(data, root); }
 
 template <class T>
-NodoArbolAVL_CasosEdad<T> *ArbolBinarioAVL_CasosEdad<T>::put(T data, NodoArbolAVL_CasosEdad<T> *r)
-{
+NodoArbolAVL_CasosEdad<T> *ArbolBinarioAVL_CasosEdad<T>::put(T data, NodoArbolAVL_CasosEdad<T> *r){
+
 //1. Realizar Insercion normal
   if (r == nullptr) {
   
     return new NodoArbolAVL_CasosEdad<T>(data);
   }
-  
-
   if (r->getClave() >= stoi(data[17])){
   
     r->setLeft(put(data, r->getLeft()));
   } else{
-  
-  
     r->setRight(put(data, r->getRight()));
   }
-
+  
   //2. Actualizar altura de este nodo padre
   r->setHeight(max(calculateHeight(r->getLeft()), calculateHeight(r->getRight())) + 1);
-
 
   //3. Obtener el factor de balance de este nodo padre
   // y chequear si este nodo se desbalanceo
@@ -137,40 +128,31 @@ NodoArbolAVL_CasosEdad<T> *ArbolBinarioAVL_CasosEdad<T>::put(T data, NodoArbolAV
 
   //Quedo desbalanceado II: corresponde una rot Der
   if (balance > 1 && stoi(data[17]) <= r->getLeft()->getClave()){
-  
-    
     return rotacionDerecha(r);
   }
 
   //Quedo desbalanceado ID: corresponde una rot Izq Der
-  if (balance > 1 && stoi(data[17]) > r->getLeft()->getClave())
-  {
-    
+  if (balance > 1 && stoi(data[17]) > r->getLeft()->getClave()) {
     r->setLeft(rotacionIzquierda(r->getLeft()));
     return rotacionDerecha(r);
   }
 
   //Quedo desbalanceado DD: corresponde una rot Izq
-  if (balance < -1 && stoi(data[17]) >= r->getRight()->getClave())
-  {
-    
+  if (balance < -1 && stoi(data[17]) >= r->getRight()->getClave()){
     return rotacionIzquierda(r);
   }
 
   //Quedo desbalanceado DI: corresponde una rot Der Izq
-  if (balance < -1 && stoi(data[17]) <= r->getRight()->getClave())
-  {
-    //std::cout<<"Rotacion der izq"<<std::endl;
+  if (balance < -1 && stoi(data[17]) <= r->getRight()->getClave()){
     r->setRight(rotacionDerecha(r->getRight()));
     return rotacionIzquierda(r);
   }
-
   return r;
 }
 
 template <class T>
-NodoArbolAVL_CasosEdad<T> *ArbolBinarioAVL_CasosEdad<T>::findMin(NodoArbolAVL_CasosEdad<T> *r)
-{
+NodoArbolAVL_CasosEdad<T> *ArbolBinarioAVL_CasosEdad<T>::findMin(NodoArbolAVL_CasosEdad<T> *r){
+
   {
     NodoArbolAVL_CasosEdad<T> *ret = r;
     while (ret->getLeft() != nullptr)
@@ -187,44 +169,23 @@ NodoArbolAVL_CasosEdad<T> *ArbolBinarioAVL_CasosEdad<T>::findMin(NodoArbolAVL_Ca
 template <class T>
 bool ArbolBinarioAVL_CasosEdad<T>::esVacio() { return root == nullptr; }
 
-/**
- * Recorre un árbol en preorden
- */
-template <class T>
-void ArbolBinarioAVL_CasosEdad<T>::preorder()
-{
-  preorder(root);
-  std::cout << std::endl;
-}
 
-template <class T>
-void ArbolBinarioAVL_CasosEdad<T>::preorder(NodoArbolAVL_CasosEdad<T> *r)
-{
-  if (r == nullptr)
-  {
-    return;
-  }
-
-  std::cout << r->getData() << " ";
-  preorder(r->getLeft());
-  preorder(r->getRight());
-}
 
 /**
  * Recorre un árbol en orden
  */
 template <class T>
-void ArbolBinarioAVL_CasosEdad<T>::inorder()
-{
+void ArbolBinarioAVL_CasosEdad<T>::inorder(){
+
   inorder(root);
   std::cout << std::endl;
 }
 
 template <class T>
-void ArbolBinarioAVL_CasosEdad<T>::inorder(NodoArbolAVL_CasosEdad<T> *r)
-{
-  if (r == nullptr)
-  {
+void ArbolBinarioAVL_CasosEdad<T>::inorder(NodoArbolAVL_CasosEdad<T> *r){
+
+  if (r == nullptr){
+  
     return;
   }
 
@@ -233,28 +194,6 @@ void ArbolBinarioAVL_CasosEdad<T>::inorder(NodoArbolAVL_CasosEdad<T> *r)
   inorder(r->getRight());
 }
 
-/**
- * Recorre un árbol en postorden
- */
-template <class T>
-void ArbolBinarioAVL_CasosEdad<T>::postorder()
-{
-  postorder(root);
-  std::cout << std::endl;
-}
-
-template <class T>
-void ArbolBinarioAVL_CasosEdad<T>::postorder(NodoArbolAVL_CasosEdad<T> *r)
-{
-  if (r == nullptr)
-  {
-    return;
-  }
-
-  postorder(r->getLeft());
-  postorder(r->getRight());
-  std::cout << r->getData() << " ";
-}
 
 
 template <class T>
@@ -264,27 +203,27 @@ int ArbolBinarioAVL_CasosEdad<T>::max(int a, int b)
 }
 
 template <class T>
-int ArbolBinarioAVL_CasosEdad<T>::calculateHeight(NodoArbolAVL_CasosEdad<T> *r)
-{
-  if (r == nullptr)
-  {
+int ArbolBinarioAVL_CasosEdad<T>::calculateHeight(NodoArbolAVL_CasosEdad<T> *r){
+
+  if (r == nullptr){
+  
     return 0;
   }
   else
     return r->getHeight();
 }
 template <class T>
-int ArbolBinarioAVL_CasosEdad<T>::getBalance(NodoArbolAVL_CasosEdad<T> *r)
-{
-  if (r == nullptr)
-  {
+int ArbolBinarioAVL_CasosEdad<T>::getBalance(NodoArbolAVL_CasosEdad<T> *r){
+
+  if (r == nullptr){
+  
     return 0;
   }
   return calculateHeight(r->getLeft()) - calculateHeight(r->getRight());
 }
 template <class T>
-NodoArbolAVL_CasosEdad<T> *ArbolBinarioAVL_CasosEdad<T>::rotacionDerecha(NodoArbolAVL_CasosEdad<T> *y)
-{
+NodoArbolAVL_CasosEdad<T> *ArbolBinarioAVL_CasosEdad<T>::rotacionDerecha(NodoArbolAVL_CasosEdad<T> *y){
+
   NodoArbolAVL_CasosEdad<T> *x = y->getLeft();
   NodoArbolAVL_CasosEdad<T> *T2 = x->getRight();
 
@@ -301,8 +240,8 @@ NodoArbolAVL_CasosEdad<T> *ArbolBinarioAVL_CasosEdad<T>::rotacionDerecha(NodoArb
 }
 
 template <class T>
-NodoArbolAVL_CasosEdad<T> *ArbolBinarioAVL_CasosEdad<T>::rotacionIzquierda(NodoArbolAVL_CasosEdad<T> *x)
-{
+NodoArbolAVL_CasosEdad<T> *ArbolBinarioAVL_CasosEdad<T>::rotacionIzquierda(NodoArbolAVL_CasosEdad<T> *x){
+
   NodoArbolAVL_CasosEdad<T> *y = x->getRight();
   NodoArbolAVL_CasosEdad<T> *T2 = y->getLeft();
 

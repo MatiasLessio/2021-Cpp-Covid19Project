@@ -75,11 +75,11 @@ public:
 
   void print(){
          
-    int colsOfInterest[] = {0, 2, 3, 12, 13,  14, 17, 20}; //columnas importantes 
-    int nColumns = sizeof(colsOfInterest) / sizeof(colsOfInterest[0]);
+    int columnas[] = {0, 2, 3, 12, 13,  14, 17, 20}; //columnas importantes 
+    int numColumnas = sizeof(columnas) / sizeof(columnas[0]);
     
-    for (int i = 0; i < nColumns; i++){
-      cout << data[colsOfInterest[i]] << "\t";
+    for (int i = 0; i < numColumnas; i++){
+      cout << data[columnas[i]] << "\t";
     }
     cout << endl;
   }
