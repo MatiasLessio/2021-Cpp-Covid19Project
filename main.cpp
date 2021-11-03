@@ -6,9 +6,9 @@
 #include <stdlib.h>
 #include "headers/case.h"
 #include "headers/Lista.h"
-//#include "headers/HashMap.h"
 #include "headers/Province.h"
 #include "headers/ArbolBinarioAVL.h"
+#include "headers/ArbolBinarioAVL_CasosEdad.h"
 #include <locale.h>
 
 using namespace std;
@@ -170,39 +170,6 @@ void stats(string path)
         cout << "Entre " << i * 10 << " y " << (i * 10) + 9 << " anios es: " << ageDeceased[i] << endl;
     }
     cout<<"-------------------------------------"<<endl;
-}
-
-void Quick_Sort_Cases(Cases arr[], int first, int last)
-{
-  int i, j, middle;
-  Cases pivot, aux;
-
-  middle = (first + last) / 2;
-  pivot = arr[middle];
-  i = first;
-  j = last;
-
-  do {
-    while (stringAinteger(arr[i].Date_CUI()) < stringAinteger(pivot.Date_CUI())){
-        i++;
-    }
-    
-    while (stringAinteger(arr[j].Date_CUI()) > stringAinteger(pivot.Date_CUI())){
-        j--;
-    }
-    if (i <= j) {
-      aux = arr[i];
-      arr[i] = arr[j];
-      arr[j] = aux;
-      i++;
-      j--;
-    }
-  } while (i <= j);   
-  if (j > first)
-    Quick_Sort_Cases(arr, first, j);
-  if (i < last)
-    Quick_Sort_Cases(arr, i, last);
-    
 }
 
 void Cases_CUI (string path, string date)
@@ -385,44 +352,50 @@ void Quick_Sort_Province_Age(Cases arr[], int first, int last)
 
 void Cases_Age(string path, string age) 
 {
+    int age_  = stoi(age);
     cout<<"----------------------------"<<endl;
     cout<<"USTED EJECUTO: CASOS POR EDAD"<<endl;
     cout<<"----------------------------"<<endl;
-    if(stoi(age)==-1){
+    if(age_ == -1){
         cout<<"NO SE INGRESO UNA EDAD\nPara ejecutar esta funcion debe ingresar una edad como parametro."<<endl;
         cout<<"-------------------------------------"<<endl;
         return;
     }
-    Cases cases;
+    ArbolBinarioAVL_CasosEdad<vector<string>> arbol;
+    vector<string> row;
+    string line, word;
     fstream file;
+    string fileAge;
     file.open(path, ios::in);
-    Lista<Cases> Listita;
     long int num=0;
     if (file.fail()) {
         cout << "No se ha podido abrir el archivo csv" << endl;
+
     } else {
-        string line;
-        getline(file, line);
-        while (getline(file, line)) {
-            cases.processLine(line);
-            if (cases.getAniosOMeses() == "Años" &&  cases.getClasificacion() == "Confirmado") {
-                if(cases.getAge()==stoi(age) && stoi(age)!=-1){
-                    Listita.insertarPrimero(cases);
-                    num++;
-                }
+    while(getline(file, line)) {
+            row.clear();
+            stringstream s(line);
+        while (getline(s, word, ',')){ 
+            if (word.size() > 0){
+                word = word.substr(1, word.size() - 2);
+            } else {
+                word = "NA";
             }
+            row.push_back(word);
         }
-        Cases ArrayCases[num];
-        for (int i = 0; i < num; i++) 
-        {
-            ArrayCases[i] = (Listita.getDato(i));
-        }
-        Quick_Sort_Province_Age(ArrayCases, 0, num-1);
-        cout<<"-----------------------------------------------------"<<endl;
-        for (int i = 0; i < num; i++) {
-            cout<<ArrayCases[i]<<endl;
+
+        fileAge = row[2];
+        if (row[3].compare("Años") == 0){
+            if(fileAge.compare("NA") != 0){
                 
+                if(stoi(fileAge) == age_){
+                    arbol.put(row);
+                    num ++;
+                }
+            } 
         }
+    }
+        arbol.inorder();
         cout<<"-----------------------------------------------------"<<endl;
         cout<<"Un total de "<<num<<" casos confirmados con la edad de "<<age<<"."<<endl;
     }

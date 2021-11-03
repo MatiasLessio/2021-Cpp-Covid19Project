@@ -73,41 +73,13 @@ public:
     height = h;
   }
 
-  void print() {
-    int colsOfInterest[] = {0, 2, 3, 5, 7, 12, 13, 14, 17, 21, 20};
+  void print(){
+         
+    int colsOfInterest[] = {0, 2, 3, 12, 13,  14, 17, 20}; //columnas importantes 
     int nColumns = sizeof(colsOfInterest) / sizeof(colsOfInterest[0]);
+    
     for (int i = 0; i < nColumns; i++){
-      switch(colsOfInterest[i]){
-        case 0:
-          cout<<"IdCaso->"<<data[colsOfInterest[i]]<<" ";
-          break;
-        case 2:
-          cout<<"Edad->"<<data[colsOfInterest[i]]<<" ";
-          break;
-        case 3:
-          cout<<"Anios/Meses->"<<data[colsOfInterest[i]]<<" ";
-          break;
-        case 5:
-          cout<<"Provincia->"<<data[colsOfInterest[i]]<<" ";
-          break;
-        case 12:
-          cout<<"CUI->"<<data[colsOfInterest[i]]<<" ";
-          break;
-        case 13:
-          cout<<"FechaCUI->"<<data[colsOfInterest[i]]<<" ";
-          break;
-        case 14:
-          cout<<"Fallecio->"<<data[colsOfInterest[i]]<<" ";
-          break;
-        case 21:
-          cout<<"IdProvincia->"<<data[colsOfInterest[i]]<<" ";
-          break;
-        case 20:
-          cout<<"Clasificacion->"<<data[colsOfInterest[i]];
-          break;
-        default:
-          break;
-      }
+      cout << data[colsOfInterest[i]] << "\t";
     }
     cout << endl;
   }
