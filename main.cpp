@@ -146,9 +146,9 @@ void stats(string path)
                     ageDeceased[0]++;
                 } else {
                     if(cases.getAniosOMeses() == "Años")
-                    {
+                   {
                         ageDeceased[cases.getAge()/10]++;
-                    }
+                   }
                 }
             }
         }

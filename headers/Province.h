@@ -49,7 +49,7 @@ public:
         }
         bool operator>=(const Province &rhs) const {
             return !(*this < rhs);
-        }//rhs significa terminos indeendientes a las restriscciones
+        }//rhs significa terminos independientes a las restricciones
         friend ostream &operator<<(ostream &os, const Province &province) {
         os << "Provincia: |" << province.NameProv << "|, Numero de ocurrencias: " << province.contador;
         return os;

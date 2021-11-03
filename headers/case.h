@@ -211,5 +211,5 @@ bool Cases::operator<=(const Cases &rhs) const {
 }
 bool Cases::operator>=(const Cases &rhs) const {
     return !(*this < rhs);
-}//rhs significa terminos indeendientes a las restriscciones
+}//rhs significa terminos independientes a las restricciones
 #endif // PARCIAL2_CASE_H
