@@ -238,8 +238,8 @@ void Cases_CUI (string path, string date)
                 arbol.put(row);
                 num++;
             }
+            
         }
-        
         arbol.inorder();
         cout<<"Cantidad de casos en Cuidados intensivos-> "<<num<<endl;
         

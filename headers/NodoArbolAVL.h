@@ -113,15 +113,15 @@ public:
   }
 
 };
+
 template<class T> 
 int NodoArbolAVL<T>::stringAinteger(string stringDate) {
     string intDate;
-    int num=stringDate.size(), j=0;
+    int num=stringDate.size();
     for(int i=0; i < num ; i++){
          int aux = stringDate[i];
         if(aux >= 48 && aux <=57){
-            intDate[j] = stringDate[i];
-            j++;
+            intDate  += stringDate[i];
         }
     }
     return stoi(intDate);
