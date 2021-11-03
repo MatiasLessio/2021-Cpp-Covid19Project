@@ -284,7 +284,7 @@ void P_Death(string path, int NumProvince)
                 for (int k = 0; k < 24; k++) {
                     if (cases.Provincia() == ProvinciaFallecidos[k].getname()) {
                         ProvinciaFallecidos[k].AumentarContador();
-                        break;
+                        //break;
                     }
                 }
             } 
