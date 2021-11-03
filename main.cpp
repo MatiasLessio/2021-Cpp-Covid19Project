@@ -324,32 +324,6 @@ void Quick_Sort_Province(Province arr[], int first, int last)
     if(i<last) Quick_Sort_Province(arr, i, last);
 }
 
-void Quick_Sort_Province_Age(Cases arr[], int first, int last)
-{
-    int i, j, medio;
-    Cases pivot, aux;
-    medio=(first+last)/2;
-    pivot= arr[medio];
-    i=first;
-    j=last;
-    do
-    {
-        while(arr[i].Provincia_Id()<pivot.Provincia_Id()) i++;
-        while(arr[j].Provincia_Id()>pivot.Provincia_Id()) j--;
-        if(i<=j)
-        {
-            aux=arr[i];
-            arr[i]=arr[j];
-            arr[j]=aux;
-            i++;
-            j--;
-        }
-    }
-    while(i<=j);
-    if(j>first) Quick_Sort_Province_Age(arr, first, j);
-    if(i<last) Quick_Sort_Province_Age(arr, i, last);
-}
-
 void Cases_Age(string path, string age) 
 {
     int age_  = stoi(age);
